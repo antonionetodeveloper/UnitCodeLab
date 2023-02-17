@@ -6,7 +6,9 @@ const GlobalStyle = createGlobalStyle`
 	}
 
  	body {
-		background-image: url("/background.svg")
+		h1, h2, h3{
+			font-family: "Sono";
+		}
 	}
 `
 
