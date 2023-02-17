@@ -37,6 +37,14 @@ const Loader = () => {
 }
 
 const Container = styled.div`
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	z-index: 3;
+
 	.boxes {
 		--size: 32px;
 		--duration: 800ms;
