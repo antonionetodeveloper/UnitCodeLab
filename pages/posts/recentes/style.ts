@@ -5,3 +5,4 @@ export const Container = styled.div`
 	background-color: #06021d;
 	color: white;
 `
+export default Container
