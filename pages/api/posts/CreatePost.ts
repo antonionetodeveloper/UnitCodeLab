@@ -1,3 +1,4 @@
+import { CORS } from "./../../../middleware/Cors"
 import { PostModule } from "./../../../models/posts"
 import { CreatePostType } from "./../../../types/CreatePost"
 import { ConnectDB } from "../../../middleware/ConnectDB"
@@ -18,8 +19,7 @@ const CreatePost = async (
 			typeof BodyPost.content != "string" ||
 			!BodyPost.comentsCont ||
 			typeof BodyPost.comentsCont != "number" ||
-			!BodyPost.updatedAt ||
-			typeof BodyPost.updatedAt != "string"
+			BodyPost.alterationID
 		) {
 			return response
 				.status(400)
@@ -30,7 +30,7 @@ const CreatePost = async (
 			title: BodyPost.title,
 			content: BodyPost.content,
 			comentsCont: BodyPost.comentsCont,
-			updatedAt: BodyPost.updatedAt,
+			alterationID: await PostModule.countDocuments(),
 		}
 
 		await PostModule.create(POST)
@@ -40,4 +40,4 @@ const CreatePost = async (
 	return response.status(405).json({ error: "Método inválido." })
 }
 
-export default ConnectDB(CreatePost)
+export default CORS(ConnectDB(CreatePost))
