@@ -1,6 +1,6 @@
 export interface CreatePostType {
 	title: string
 	content: string
-	comentsCont: number
+	comentsCount: number
 	alterationID: number
 }
