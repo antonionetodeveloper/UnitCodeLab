@@ -24,6 +24,7 @@ export const ConnectDB =
 					"Erro ao conectar no banco. erro: " + error
 				})
 
+				await mongoose.set("strictQuery", true)
 				await mongoose.connect(MONGO_DB_URL)
 				return handler(req, res)
 			}
