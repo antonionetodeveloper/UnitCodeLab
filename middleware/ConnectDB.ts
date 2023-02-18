@@ -1,10 +1,10 @@
 import type { NextApiRequest, NextApiResponse, NextApiHandler } from "next"
-import { RegularAnswer } from "./../types/RegularAnswear"
+import { RegularAnswear } from "./../types/RegularAnswear"
 import mongoose from "mongoose"
 
 export const ConnectDB =
 	(handler: NextApiHandler) =>
-	async (req: NextApiRequest, res: NextApiResponse<RegularAnswer>) => {
+	async (req: NextApiRequest, res: NextApiResponse<RegularAnswear>) => {
 		if (mongoose.connections[0].readyState) {
 			return handler(req, res)
 		}
@@ -13,7 +13,7 @@ export const ConnectDB =
 		else {
 			const { MONGO_DB_URL } = process.env
 			if (!MONGO_DB_URL) {
-				return res.status(500).json({
+				return res.status(401).json({
 					error: "dados da '.env' não foram informadas!",
 				})
 			} else {

@@ -1,4 +1,4 @@
-export type RegularAnswer = {
+export type RegularAnswear = {
 	msg?: string
 	error?: string
 }
