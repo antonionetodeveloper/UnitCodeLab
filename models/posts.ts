@@ -4,6 +4,7 @@ const PostSchema = new Schema(
 	{
 		title: { type: String, required: true },
 		content: { type: String, required: true },
+		author: { type: String, required: true },
 		commentsCount: { type: Number, default: 0 },
 		updatedAt: { type: Date, default: Date.now },
 	},

@@ -17,6 +17,8 @@ const CreatePost = async (
 			typeof BodyPost.title != "string" ||
 			!BodyPost.content ||
 			typeof BodyPost.content != "string" ||
+			!BodyPost.author ||
+			typeof BodyPost.author != "string" ||
 			BodyPost.commentsCount ||
 			BodyPost.updatedAt
 		) {
@@ -25,9 +27,14 @@ const CreatePost = async (
 				.json({ error: "Body não preenchido adequadamente." })
 		}
 
+		const capitalize = (str: string) =>
+			str.charAt(0).toUpperCase() + str.substring(1)
+		const CapitalizedTitle = capitalize(BodyPost.title)
+
 		const POST: CreatePostType = {
-			title: BodyPost.title,
+			title: CapitalizedTitle,
 			content: BodyPost.content,
+			author: BodyPost.author,
 			commentsCount: BodyPost.commentsCount,
 		}
 
