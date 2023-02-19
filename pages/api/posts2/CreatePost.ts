@@ -30,7 +30,7 @@ const CreatePostPrisma = async (
 		} */
 
 		try {
-			await prisma?.post.create({
+			const post = await prisma.post.create({
 				data: {
 					title: BodyPost.title,
 					content: BodyPost.content,
