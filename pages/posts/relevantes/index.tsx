@@ -21,7 +21,7 @@ export default function Relevantes({ posts }) {
 			<Header />
 
 			<Container>
-				<h1>Discussões relevantes!</h1>
+				<h2>Discussões relevantes!</h2>
 				<PostList Posts={posts} />
 			</Container>
 		</>

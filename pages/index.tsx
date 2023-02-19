@@ -20,14 +20,16 @@ export default function Index() {
 
 			<Container>
 				<h1>Bem-vindo à Unit Code Lab!</h1>
-				<div>
-					<Link href="/posts/recentes/">
-						<a href="/posts/recentes/">
-							<RegularButton>Ir para discussões</RegularButton>
-						</a>
-					</Link>
-					<RegularButton>Tirar uma dúvida</RegularButton>
-				</div>
+				<section>
+					<div>
+						<Link href="/posts/recentes/">
+							<a href="/posts/recentes/">
+								<RegularButton>Ir para discussões</RegularButton>
+							</a>
+						</Link>
+						<RegularButton>Tirar uma dúvida</RegularButton>
+					</div>
+				</section>
 			</Container>
 		</>
 	)

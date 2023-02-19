@@ -20,7 +20,7 @@ export default function Recentes({ posts }) {
 			<Header />
 
 			<Container>
-				<h1>Discussões recentes!</h1>
+				<h2>Discussões recentes!</h2>
 				<PostList Posts={posts} />
 			</Container>
 		</>

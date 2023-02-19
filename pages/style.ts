@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-export const Container = styled.div`
+export const Container = styled.main`
 	background-image: url("/background.svg");
 	min-height: 90vh;
 
@@ -16,12 +16,14 @@ export const Container = styled.div`
 		font-weight: 900;
 	}
 
-	div {
-		display: flex;
-		gap: 5vw;
+	section {
+		div {
+			display: flex;
+			gap: 5vw;
 
-		a {
-			text-decoration: none;
+			a {
+				text-decoration: none;
+			}
 		}
 	}
 `
