@@ -1,6 +1,6 @@
-import { CORS } from "../../../middleware/Cors"
-import { PostModule } from "../../../models/posts"
-import { CreatePostType } from "../../../types/CreatePost"
+import { CORS } from "./../../../middleware/Cors"
+import { PostModule } from "./../../../models/posts"
+import { CreatePostType } from "./../../../types/CreatePost"
 import { ConnectDB } from "../../../middleware/ConnectDB"
 import { NextApiRequest, NextApiResponse } from "next"
 

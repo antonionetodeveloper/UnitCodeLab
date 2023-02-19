@@ -1,4 +1,4 @@
-import { CORS } from "../../../middleware/Cors"
+import { CORS } from "./../../../middleware/Cors"
 import { ConnectDB } from "../../../middleware/ConnectDB"
 import { NextApiRequest, NextApiResponse } from "next"
 import { PostModule } from "../../../models/posts"
