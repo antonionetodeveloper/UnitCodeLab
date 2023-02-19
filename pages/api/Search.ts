@@ -15,7 +15,7 @@ const SearchEndPoint = async (
 			.sort({ commentsCount: -1 })
 			.limit(3)
 
-		if (data.length == 0) {
+		if (!data[0]) {
 			return response
 				.status(200)
 				.json({ message: "Nenhuma discussão encontrada." })
