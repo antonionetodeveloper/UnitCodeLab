@@ -10,11 +10,11 @@ const SearchEndPoint = async (
 	const { query } = request.body
 	const regex = { $regex: query, $options: "i" }
 
-	try {
-		const data = await PostModule.find({ title: regex })
-			.sort({ commentsCount: -1 })
-			.limit(3)
+	const data = await PostModule.find({ title: regex })
+		.sort({ commentsCount: -1 })
+		.limit(3)
 
+	try {
 		if (!data[0]) {
 			return response
 				.status(200)
