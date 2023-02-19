@@ -9,7 +9,7 @@ const GetRecentPosts = async (
 ) => {
 	if (request.method == "GET") {
 		// Get the 10 most recent discussions
-		const Posts = await PostModule.find().sort({ alterationID: -1 }).limit(10)
+		const Posts = await PostModule.find().sort({ updatedAt: -1 }).limit(10)
 
 		if (!Posts) {
 			return response

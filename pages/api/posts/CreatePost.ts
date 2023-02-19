@@ -17,9 +17,8 @@ const CreatePost = async (
 			typeof BodyPost.title != "string" ||
 			!BodyPost.content ||
 			typeof BodyPost.content != "string" ||
-			!BodyPost.commentsCount ||
-			typeof BodyPost.commentsCount != "number" ||
-			BodyPost.alterationID
+			BodyPost.commentsCount ||
+			BodyPost.updatedAt
 		) {
 			return response
 				.status(400)
@@ -30,7 +29,6 @@ const CreatePost = async (
 			title: BodyPost.title,
 			content: BodyPost.content,
 			commentsCount: BodyPost.commentsCount,
-			alterationID: await PostModule.countDocuments(),
 		}
 
 		await PostModule.create(POST)
