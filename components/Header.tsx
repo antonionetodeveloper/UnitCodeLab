@@ -2,6 +2,7 @@ import Link from "next/link"
 import { useContext } from "react"
 import styled from "styled-components"
 import LoadingContext from "../pages/context/Context"
+import Search from "./search/Search"
 
 const Header = () => {
 	const { selectedHeaderItem } = useContext(LoadingContext)
@@ -9,30 +10,33 @@ const Header = () => {
 	return (
 		<Container SelectedItem={selectedHeaderItem}>
 			<nav>
-				<div>
-					<span>
-						<Link href="/">
-							<a href="/" className="inicio">
-								Início
-							</a>
-						</Link>
-					</span>
+				<div className="leftSideDiv">
+					<div className="hooks">
+						<span>
+							<Link href="/">
+								<a href="/" className="inicio">
+									Início
+								</a>
+							</Link>
+						</span>
 
-					<span>
-						<Link href="/posts/recentes/">
-							<a href="/posts/recentes/" className="recentes">
-								Recentes
-							</a>
-						</Link>
-					</span>
+						<span>
+							<Link href="/posts/recentes/">
+								<a href="/posts/recentes/" className="recentes">
+									Recentes
+								</a>
+							</Link>
+						</span>
 
-					<span>
-						<Link href="/posts/relevantes/">
-							<a href="/posts/relevantes/" className="relevantes">
-								Relevantes
-							</a>
-						</Link>
-					</span>
+						<span>
+							<Link href="/posts/relevantes/">
+								<a href="/posts/relevantes/" className="relevantes">
+									Relevantes
+								</a>
+							</Link>
+						</span>
+					</div>
+					<Search />
 				</div>
 				<div></div>
 			</nav>
@@ -50,15 +54,25 @@ const Container: any = styled.header`
 
 	nav {
 		margin-left: 2vw;
-		div {
+		.leftSideDiv {
 			display: flex;
 			gap: 2vw;
+			justify-content: center;
+
+			.hooks {
+				display: flex;
+				flex-direction: row;
+				gap: 2vw;
+			}
 
 			span {
+				display: flex;
+				align-items: center;
+
 				a {
-					text-decoration: none;
 					letter-spacing: 1px;
 					font-family: "Sono";
+					font-size: 1.2vw;
 					color: black;
 
 					:hover {

@@ -4,7 +4,6 @@ import styled from "styled-components"
 
 const PostList = ({ Posts }) => {
 	const ArrayPosts = Posts.Posts
-	console.log(ArrayPosts)
 
 	return (
 		<Container>
