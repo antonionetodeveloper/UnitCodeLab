@@ -1,20 +1,10 @@
-/* eslint-disable react/prop-types */
-import { useContext } from "react"
 import styled from "styled-components"
-import LoadingContext from "../pages/context/Context"
 
-const RegularButton = (props) => {
-	const CONTEXT = useContext(LoadingContext)
-
+// eslint-disable-next-line react/prop-types
+const RegularButton = ({ children }) => {
 	return (
 		<Container>
-			<button
-				onClick={() => {
-					CONTEXT.setLoading(true)
-				}}
-			>
-				{props.children}
-			</button>
+			<button>{children}</button>
 		</Container>
 	)
 }
