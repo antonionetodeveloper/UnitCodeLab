@@ -40,7 +40,7 @@ const CreatePostPrisma = async (
 			return response.status(201).json({ message: "Criado com sucesso." })
 		} catch (error) {
 			console.log(error)
-			return response.status(400).json({ erro: "erro -> ", error })
+			return response.status(400).json({ erro: "erro." })
 		}
 	}
 }
