@@ -25,7 +25,7 @@ export const ConnectDB =
 				})
 
 				mongoose.set("strictQuery", true)
-				await mongoose.connect(MONGO_DB_URL)
+				mongoose.connect(MONGO_DB_URL)
 				return handler(req, res)
 			}
 		}
