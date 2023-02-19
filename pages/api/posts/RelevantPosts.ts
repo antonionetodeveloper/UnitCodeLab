@@ -9,7 +9,7 @@ const GetRelevantPosts = async (
 ) => {
 	if (request.method == "GET") {
 		// Get the 10 most popular discussions
-		const Posts = await PostModule.find().sort({ commentsCount: -1 }).limit(10)
+		const Posts = await PostModule.find().sort({ comentsCount: -1 }).limit(10)
 
 		if (!Posts) {
 			return response
