@@ -36,7 +36,9 @@ export default function Teste() {
 				onClick={() => {
 					handle()
 				}}
-			></button>
+			>
+				AE
+			</button>
 		</>
 	)
 }

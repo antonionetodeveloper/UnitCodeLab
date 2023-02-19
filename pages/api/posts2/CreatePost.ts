@@ -1,5 +1,4 @@
 import { prisma } from "../../../lib/prisma"
-import { CreatePostType } from "./../../../types/CreatePost"
 import { NextApiRequest, NextApiResponse } from "next"
 
 const CreatePostPrisma = async (
