@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse, NextApiHandler } from "next"
-import { RegularAnswear } from "./../types/RegularAnswear"
+import { RegularAnswear } from "../types/RegularAnswear"
 import mongoose from "mongoose"
 
 export const ConnectDB =
