@@ -5,4 +5,6 @@ export interface LoadingContextType {
 	setLoading: Dispatch<SetStateAction<boolean>>
 	auth: boolean
 	setAuth: Dispatch<SetStateAction<boolean>>
+	selectedHeaderItem: string
+	setSelectedHeaderItem: Dispatch<SetStateAction<string>>
 }

@@ -9,9 +9,19 @@ const LoadingContext = createContext<LoadingContextType>(
 export function Context({ children }) {
 	const [loading, setLoading] = useState(true)
 	const [auth, setAuth] = useState(false)
+	const [selectedHeaderItem, setSelectedHeaderItem] = useState("inicio")
 
 	return (
-		<LoadingContext.Provider value={{ loading, setLoading, auth, setAuth }}>
+		<LoadingContext.Provider
+			value={{
+				loading,
+				setLoading,
+				auth,
+				setAuth,
+				selectedHeaderItem,
+				setSelectedHeaderItem,
+			}}
+		>
 			{children}
 		</LoadingContext.Provider>
 	)

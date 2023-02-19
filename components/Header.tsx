@@ -4,37 +4,33 @@ import styled from "styled-components"
 import LoadingContext from "../pages/context/Context"
 
 const Header = () => {
-	const CONTEXT = useContext(LoadingContext)
+	const { selectedHeaderItem } = useContext(LoadingContext)
 
 	return (
-		<Container>
+		<Container SelectedItem={selectedHeaderItem}>
 			<nav>
 				<div>
-					<span
-						onClick={() => {
-							CONTEXT.setLoading(true)
-						}}
-					>
+					<span>
 						<Link href="/">
-							<a href="/">Início</a>
+							<a href="/" className="inicio">
+								Início
+							</a>
 						</Link>
 					</span>
-					<span
-						onClick={() => {
-							CONTEXT.setLoading(true)
-						}}
-					>
+
+					<span>
 						<Link href="/posts/recentes/">
-							<a href="/posts/recentes/">Recentes</a>
+							<a href="/posts/recentes/" className="recentes">
+								Recentes
+							</a>
 						</Link>
 					</span>
-					<span
-						onClick={() => {
-							CONTEXT.setLoading(true)
-						}}
-					>
+
+					<span>
 						<Link href="/posts/relevantes/">
-							<a href="/posts/relevantes/">Relevantes</a>
+							<a href="/posts/relevantes/" className="relevantes">
+								Relevantes
+							</a>
 						</Link>
 					</span>
 				</div>
@@ -44,7 +40,7 @@ const Header = () => {
 	)
 }
 
-const Container = styled.header`
+const Container: any = styled.header`
 	width: 100vw;
 	height: 10vh;
 
@@ -71,6 +67,19 @@ const Container = styled.header`
 				}
 			}
 		}
+	}
+
+	a.inicio {
+		text-decoration: ${(props: any) =>
+			props.SelectedItem == "inicio" ? "underline" : "none"};
+	}
+	a.recentes {
+		text-decoration: ${(props: any) =>
+			props.SelectedItem == "recentes" ? "underline" : "none"};
+	}
+	a.relevantes {
+		text-decoration: ${(props: any) =>
+			props.SelectedItem == "relevantes" ? "underline" : "none"};
 	}
 `
 
