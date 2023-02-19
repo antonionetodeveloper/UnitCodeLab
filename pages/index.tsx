@@ -3,8 +3,19 @@ import { Container } from "./style"
 import RegularButton from "../components/RegularButton"
 import Link from "next/link"
 import Header from "../components/Header"
+import axios from "axios"
+import { API_URL } from "./_document"
 
 export default function Index() {
+	axios
+		.get(API_URL + "api/test")
+		.then((response) => {
+			console.log(response)
+		})
+		.catch((error) => {
+			console.log(error)
+		})
+
 	return (
 		<>
 			<Head>
