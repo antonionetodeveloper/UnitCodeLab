@@ -30,7 +30,7 @@ const CreatePost = async (
 				Comment,
 			})
 			Post.commentsCount += 1
-			Post.updatedAt = Date.now
+			Post.updatedAt = new Date()
 
 			await PostModule.findByIdAndUpdate({ _id: PostID }, Post)
 			return response
