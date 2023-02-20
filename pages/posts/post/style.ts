@@ -5,3 +5,4 @@ export const Container = styled.main`
 		display: block;
 	}
 `
+export default Container
