@@ -10,7 +10,7 @@ export async function getStaticPaths() {
 	const paths = IDs.map((ID) => ({ params: { post_ID: ID } }))
 	return {
 		paths,
-		fallback: false,
+		fallback: true,
 	}
 }
 
@@ -28,7 +28,7 @@ export async function getStaticProps(context) {
 		props: {
 			post: postData,
 		},
-		revalidate: 10,
+		revalidate: 5, // 5 seconds
 	}
 }
 
