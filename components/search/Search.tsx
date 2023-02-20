@@ -14,10 +14,10 @@ const Search = () => {
 		SearchHandle(search)
 	}, [search])
 
-	async function SearchHandle(search: string) {
-		const capitalize = (str: string) =>
-			str.charAt(0).toUpperCase() + str.substring(1)
+	const capitalize = (str: string) =>
+		str.charAt(0).toUpperCase() + str.substring(1)
 
+	async function SearchHandle(search: string) {
 		if (search.length > 0) {
 			const capitalizedSearch = capitalize(search)
 
@@ -27,7 +27,8 @@ const Search = () => {
 				})
 				.then((response) => {
 					if (response.data.message != "Nenhuma discussão encontrada.") {
-						setArraySearchs(response.data.data)
+						setArraySearchs(response.data)
+						console.log(response.data)
 					} else {
 						setArraySearchs(response.data.message)
 					}
@@ -89,9 +90,15 @@ const Search = () => {
 				{search.length > 0 ? (
 					<ul>
 						{typeof arraySearchs != "string" ? (
-							arraySearchs.map((item: { title: string; author: string }) => (
-								<Item title={item.title} author={item.author} />
-							))
+							arraySearchs.map(
+								(item: { title: string; author: string; _id: number }) => (
+									<Item
+										title={item.title}
+										author={item.author}
+										path={item._id}
+									/>
+								),
+							)
 						) : (
 							<li className="notFound">{arraySearchs}</li>
 						)}

@@ -4,7 +4,7 @@ import { NextApiRequest, NextApiResponse } from "next"
 import { PostModule } from "../../../models/posts"
 
 const GetPost = async (request: NextApiRequest, response: NextApiResponse) => {
-	if (request.method == "GET") {
+	if (request.method == "POST") {
 		const { PostID } = await request.body
 		const Post = await PostModule.findById(PostID)
 		Post.__v = null

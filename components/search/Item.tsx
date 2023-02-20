@@ -1,21 +1,29 @@
 /* eslint-disable react/prop-types */
+import Link from "next/link"
 import styled from "styled-components"
 
-export const Item = ({ title, author }) => {
+export const Item = ({ title, author, path }) => {
 	return (
 		<Container>
-			<li>
-				<img src="/assets/chat.png" alt="discussão" />
-				<div>
-					<h5>{title}</h5>
-					<span>{author}</span>
-				</div>
-			</li>
+			<Link href={`/posts/post/${path}`}>
+				<a href={`/posts/post/${path}`}>
+					<li>
+						<img src="/assets/chat.png" alt="discussão" />
+						<div>
+							<h5>{title}</h5>
+							<span>{author}</span>
+						</div>
+					</li>
+				</a>
+			</Link>
 		</Container>
 	)
 }
 
 const Container = styled.div`
+	a {
+		text-decoration: none;
+	}
 	li {
 		display: flex;
 		align-items: center;
@@ -24,6 +32,7 @@ const Container = styled.div`
 		padding: 1vw;
 		transition: 0.3s;
 		width: 23vw;
+		color: black;
 
 		img {
 			width: 10%;

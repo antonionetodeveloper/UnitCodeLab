@@ -21,7 +21,7 @@ const SearchEndPoint = async (
 				.json({ message: "Nenhuma discussão encontrada." })
 		}
 
-		return response.status(200).json({ data })
+		return response.status(200).json(data)
 	} catch (error) {
 		return response.status(400).json({ error: "Error -> " + error })
 	}
