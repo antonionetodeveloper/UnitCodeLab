@@ -27,8 +27,8 @@ const Search = () => {
 				})
 				.then((response) => {
 					if (response.data.message != "Nenhuma discussão encontrada.") {
-						setArraySearchs(response.data)
-						console.log(response.data)
+						setArraySearchs(response.data.data)
+						console.log(response.data.data)
 					} else {
 						setArraySearchs(response.data.message)
 					}
