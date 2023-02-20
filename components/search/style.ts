@@ -45,13 +45,13 @@ export const Container = styled.div`
 	}
 	/* styling of Input */
 	.input {
-		font-size: 0.9rem;
 		background-color: transparent;
 		width: 100%;
 		height: 100%;
 		padding-inline: 0.5em;
 		padding-block: 0.7em;
 		border: none;
+		font-size: 1.2vw;
 	}
 	/* styling of animated border */
 	.form:before {
@@ -119,10 +119,10 @@ export const Container = styled.div`
 	}
 
 	.notFound {
-		font-family: "Sono";
 		padding: 2vw;
 		text-align: center;
 		transition: 0.3s;
+		list-style-type: none;
 
 		:hover {
 			cursor: not-allowed;

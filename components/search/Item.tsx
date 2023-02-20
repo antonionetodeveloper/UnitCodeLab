@@ -46,8 +46,6 @@ const Container = styled.div`
 			display: flex;
 			flex-direction: column;
 
-			font-family: "Sono";
-
 			h5 {
 				font-weight: 900;
 				font-size: 1.2vw;

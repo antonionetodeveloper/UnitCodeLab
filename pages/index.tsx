@@ -1,10 +1,17 @@
 import Head from "next/head"
-import { Container } from "./style"
-import RegularButton from "../components/RegularButton"
-import Link from "next/link"
-import Header from "../components/Header"
 import { useContext } from "react"
 import LoadingContext from "./context/Context"
+
+import { Main } from "./style"
+
+import Header from "../components/Header"
+import HomeBanner from "./components/HomeBanner"
+import DividerWave from "../components/divider/Wave"
+import TiraDuvidas from "./components/TiraDuvidas"
+import Contribua from "./components/Contribua"
+import TiltDivider from "../components/divider/Tilt"
+import ApiSection from "./components/Api"
+import Footer from "../components/Footer"
 
 export default function Index() {
 	const { setSelectedHeaderItem } = useContext(LoadingContext)
@@ -18,19 +25,16 @@ export default function Index() {
 
 			<Header />
 
-			<Container>
-				<h1>Bem-vindo à Unit Code Lab!</h1>
-				<section>
-					<div>
-						<Link href="/posts/recentes/">
-							<a href="/posts/recentes/">
-								<RegularButton>Ir para discussões</RegularButton>
-							</a>
-						</Link>
-						<RegularButton>Tirar uma dúvida</RegularButton>
-					</div>
-				</section>
-			</Container>
+			<Main>
+				<HomeBanner />
+				<DividerWave />
+				<TiraDuvidas />
+				<Contribua />
+				<TiltDivider />
+				<ApiSection />
+			</Main>
+
+			<Footer />
 		</>
 	)
 }

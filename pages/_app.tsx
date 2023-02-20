@@ -16,13 +16,6 @@ export default function App({ Component, pageProps }: AppProps) {
 		<ThemeProvider theme={theme}>
 			<GlobalStyle />
 			<Context>
-				<link rel="preconnect" href="https://fonts.googleapis.com" />
-				<link rel="preconnect" href="https://fonts.gstatic.com" />
-				<link
-					href="https://fonts.googleapis.com/css2?family=Sono:wght@300;400;500;600;700;800&display=swap"
-					rel="stylesheet"
-				/>
-
 				<LoaderContainer Component={Component} pageProps={pageProps} />
 			</Context>
 		</ThemeProvider>

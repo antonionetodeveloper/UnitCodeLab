@@ -35,6 +35,19 @@ const Header = () => {
 								</a>
 							</Link>
 						</span>
+
+						<span>
+							<Link href="/posts/relevantes/">
+								<a
+									href="https://github.com/antonionetodeveloper/UnitCodeLab"
+									className="api"
+									target="_blank"
+									rel="noreferrer"
+								>
+									API
+								</a>
+							</Link>
+						</span>
 					</div>
 					<Search />
 				</div>
@@ -45,15 +58,19 @@ const Header = () => {
 }
 
 const Container: any = styled.header`
-	width: 100vw;
-	height: 10vh;
-
 	background-color: white;
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
+	width: 100vw;
+	height: 10vh;
+	position: fixed;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+	z-index: 3;
 
 	nav {
 		margin-left: 2vw;
+
 		.leftSideDiv {
 			display: flex;
 			gap: 2vw;
@@ -71,8 +88,8 @@ const Container: any = styled.header`
 
 				a {
 					letter-spacing: 1px;
-					font-family: "Sono";
 					font-size: 1.2vw;
+					font-weight: 700;
 					color: black;
 
 					:hover {
@@ -94,6 +111,9 @@ const Container: any = styled.header`
 	a.relevantes {
 		text-decoration: ${(props: any) =>
 			props.SelectedItem == "relevantes" ? "underline" : "none"};
+	}
+	a.api {
+		text-decoration: none;
 	}
 `
 

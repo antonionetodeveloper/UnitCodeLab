@@ -6,10 +6,24 @@ const GlobalStyle = createGlobalStyle`
 	}
 
  	body {
-		h1, h2, h3{
-			font-family: "Sono";
-		}
+		font-family: "system-ui";
+		background-color: white;
 	}
+
+	::-webkit-scrollbar {
+		width: 20px;
+	}
+
+	/* Track */
+	::-webkit-scrollbar-track {
+		box-shadow: inset 0 0 5px grey;
+	}
+
+	/* Handle */
+	::-webkit-scrollbar-thumb {
+		background: #2256f4;
+	}
+
 `
 
 export default GlobalStyle
