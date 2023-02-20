@@ -1,6 +1,11 @@
+/* eslint-disable react/jsx-key */
 /* eslint-disable react/prop-types */
 import { Container } from "./style"
 import { API_URL } from "../../_document"
+import Comments from "./components/Comments"
+import Header from "../../../components/Header"
+import { useContext } from "react"
+import LoadingContext from "../../context/Context"
 
 export async function getStaticPaths() {
 	const response = await fetch(API_URL + "api/posts/ShowIDposts")
@@ -35,13 +40,22 @@ export async function getStaticProps(context) {
 export default function Post({ post }) {
 	const Post = post.Post
 
+	const { setSelectedHeaderItem } = useContext(LoadingContext)
+	setSelectedHeaderItem("none")
+
 	return (
-		<Container>
-			<h4>Título: {Post.title}</h4>
-			<p>Conteúdo: {Post.content}</p>
-			<span>Autor: {Post.author}</span>
-			<span>Quantidade de comentários: {Post.commentsCount}</span>
-			<span>Ultima atualização em: {Post.updatedAt}</span>
-		</Container>
+		<>
+			<Header />
+			<Container>
+				<h4>Título: {Post.title}</h4>
+				<p>Conteúdo: {Post.content}</p>
+				<span>Autor: {Post.author}</span>
+				<span>Quantidade de comentários: {Post.commentsCount}</span>
+				<div>
+					<Comments Comments={Post.comments} />
+				</div>
+				<span>Ultima atualização em: {Post.updatedAt}</span>
+			</Container>
+		</>
 	)
 }
