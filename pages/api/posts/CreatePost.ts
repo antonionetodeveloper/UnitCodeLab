@@ -19,6 +19,7 @@ const CreatePost = async (
 			typeof BodyPost.content != "string" ||
 			!BodyPost.author ||
 			typeof BodyPost.author != "string" ||
+			BodyPost.comments ||
 			BodyPost.commentsCount ||
 			BodyPost.updatedAt
 		) {
