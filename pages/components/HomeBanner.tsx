@@ -2,6 +2,8 @@ import Image from "next/image"
 import Link from "next/link"
 import styled from "styled-components"
 import RegularButton from "../../components/Buttons/AlternativeButton"
+import { Suspense } from "react"
+import Loader from "../../components/Loader"
 
 const HomeBanner = () => {
 	return (
@@ -22,13 +24,15 @@ const HomeBanner = () => {
 				</Link>
 			</div>
 			<div className="Image">
-				<Image
-					src={"/home/screen-shot-page.png"}
-					height={500}
-					width={900}
-					quality={100}
-					priority
-				/>
+				<Suspense fallback={<Loader />}>
+					<Image
+						src={"/home/screen-shot-page.png"}
+						height={500}
+						width={900}
+						quality={100}
+						priority
+					/>
+				</Suspense>
 			</div>
 		</Container>
 	)
