@@ -28,11 +28,12 @@ export default function Relevantes({ posts }) {
 	)
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
 	const response = await fetch(API_URL + "api/posts/RelevantPosts")
 	const posts = await response.json()
 
 	return {
 		props: { posts: posts },
+		revalidate: 5, // 5 seconds
 	}
 }
