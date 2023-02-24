@@ -7,7 +7,14 @@ const Footer = () => {
 				Online illustrations by Storyset
 			</a>
 			<p>
-				O código é open source. Veja e <a href="#">contribua com o projeto</a>.
+				O código é open source.{" "}
+				<a
+					href="https://github.com/antonionetodeveloper/UnitCodeLab"
+					target="_blank"
+					rel="noreferrer"
+				>
+					Veja e contribua com o projeto.
+				</a>
 			</p>
 		</Container>
 	)
