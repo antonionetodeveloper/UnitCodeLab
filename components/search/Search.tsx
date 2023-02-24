@@ -86,8 +86,8 @@ const Search = () => {
 					</svg>
 				</button>
 			</form>
-			<div className="options">
-				{search.length > 0 ? (
+			{search.length > 0 ? (
+				<div className="options">
 					<ul>
 						{typeof arraySearchs != "string" ? (
 							arraySearchs.map(
@@ -103,10 +103,10 @@ const Search = () => {
 							<li className="notFound">{arraySearchs}</li>
 						)}
 					</ul>
-				) : (
-					<div style={{ display: "none" }} />
-				)}
-			</div>
+				</div>
+			) : (
+				<div style={{ display: "none" }} />
+			)}
 		</Container>
 	)
 }
