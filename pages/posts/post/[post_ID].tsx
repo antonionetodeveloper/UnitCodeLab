@@ -6,20 +6,21 @@ import Comments from "./components/Comments"
 import Header from "../../../components/Header"
 import { useContext } from "react"
 import Context from "../../context/Context"
+import { GetStaticPaths, GetStaticProps } from "next"
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
 	const response = await fetch(API_URL + "api/posts/ShowIDposts")
 	const Data = await response.json()
 	const IDs = Data.Data
 
-	const paths = IDs.map((ID) => ({ params: { post_ID: ID } }))
+	const paths = IDs.map((ID: string) => ({ params: { post_ID: ID } }))
 	return {
 		paths,
 		fallback: true,
 	}
 }
 
-export async function getStaticProps(context) {
+export const getStaticProps: GetStaticProps = async (context) => {
 	const response = await fetch(API_URL + "api/posts/SinglePost", {
 		method: "POST",
 		headers: {

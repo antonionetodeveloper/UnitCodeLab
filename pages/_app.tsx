@@ -1,6 +1,6 @@
 import type { AppProps } from "next/app"
 import { Router } from "next/router"
-import { useEffect, useState } from "react"
+import { useState, useEffect } from "react"
 import { ThemeProvider, DefaultTheme } from "styled-components"
 import Loader from "../components/Loader"
 import GlobalStyle from "../styles/GlobalStyle"
@@ -17,11 +17,9 @@ export default function App({ Component, pageProps }: AppProps) {
 	const [loading, setLoading] = useState(false)
 	useEffect(() => {
 		const start = () => {
-			console.log("start")
 			setLoading(true)
 		}
 		const end = () => {
-			console.log("findished")
 			setLoading(false)
 		}
 		Router.events.on("routeChangeStart", start)
@@ -35,13 +33,11 @@ export default function App({ Component, pageProps }: AppProps) {
 	}, [])
 
 	return (
-		<ThemeProvider theme={theme}>
-			<GlobalStyle />
-			<ContextProvider>
-				<ContextProvider>
-					{loading ? <Loader /> : <Component {...pageProps} />}
-				</ContextProvider>
-			</ContextProvider>
-		</ThemeProvider>
+		<ContextProvider>
+			<ThemeProvider theme={theme}>
+				<GlobalStyle />
+				{loading ? <Loader /> : <Component {...pageProps} />}
+			</ThemeProvider>
+		</ContextProvider>
 	)
 }

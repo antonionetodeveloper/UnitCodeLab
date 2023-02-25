@@ -1,11 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/jsx-key */
-import { useEffect, useState } from "react"
 import axios from "axios"
 import { API_URL } from "../../pages/_document"
 import { Item } from "./Item"
 import Container from "./style"
 import Loader from "../Loader"
+import { useState, useEffect } from "react"
 
 /* eslint-disable react/no-unknown-property */
 const Search = () => {
@@ -81,11 +81,11 @@ const Search = () => {
 						fill="none"
 						viewBox="0 0 24 24"
 						stroke="currentColor"
-						stroke-width="2"
+						strokeWidth="2"
 					>
 						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
+							strokeLinecap="round"
+							strokeLinejoin="round"
 							d="M6 18L18 6M6 6l12 12"
 						></path>
 					</svg>

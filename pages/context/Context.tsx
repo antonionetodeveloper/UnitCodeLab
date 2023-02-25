@@ -1,10 +1,9 @@
-import { createContext, useState } from "react"
+import { createContext, ReactNode, useState } from "react"
 import { ContextType } from "../../types/ContextType"
 
 const Context = createContext<ContextType>({} as ContextType)
 
-// eslint-disable-next-line react/prop-types
-export function ContextProvider({ children }) {
+export function ContextProvider({ children }: { children: ReactNode }) {
 	const [auth, setAuth] = useState(false)
 	const [selectedHeaderItem, setSelectedHeaderItem] = useState("inicio")
 
