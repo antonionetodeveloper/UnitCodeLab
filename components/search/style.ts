@@ -22,7 +22,7 @@ export const Container = styled.div`
 	/* styling of whole input container */
 	.form {
 		--timing: 0.3s;
-		--width-of-input: 200px;
+		--width-of-input: 20vw;
 		--height-of-input: 40px;
 		--border-height: 2px;
 		--input-bg: #fff;
@@ -38,10 +38,6 @@ export const Container = styled.div`
 		border-radius: var(--border-radius);
 		transition: border-radius 0.5s ease;
 		background: var(--input-bg, #fff);
-
-		:hover {
-			cursor: text;
-		}
 	}
 	/* styling of Input */
 	.input {
@@ -86,6 +82,7 @@ export const Container = styled.div`
 		background: none;
 		opacity: 0;
 		visibility: hidden;
+		z-index: 2;
 		:hover {
 			cursor: pointer;
 		}

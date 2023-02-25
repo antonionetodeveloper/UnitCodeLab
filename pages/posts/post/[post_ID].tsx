@@ -5,7 +5,7 @@ import { API_URL } from "../../_document"
 import Comments from "./components/Comments"
 import Header from "../../../components/Header"
 import { useContext } from "react"
-import LoadingContext from "../../context/Context"
+import Context from "../../context/Context"
 
 export async function getStaticPaths() {
 	const response = await fetch(API_URL + "api/posts/ShowIDposts")
@@ -40,7 +40,7 @@ export async function getStaticProps(context) {
 export default function Post({ post }) {
 	const Post = post.Post
 
-	const { setSelectedHeaderItem } = useContext(LoadingContext)
+	const { setSelectedHeaderItem } = useContext(Context)
 	setSelectedHeaderItem("none")
 
 	return (

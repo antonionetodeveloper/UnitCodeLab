@@ -4,11 +4,11 @@ import Header from "../../../components/Header"
 import Head from "next/head"
 import { API_URL } from "../../_document"
 import PostList from "../components/PostList"
-import LoadingContext from "../../context/Context"
 import { useContext } from "react"
+import Context from "../../context/Context"
 
 export default function Recentes({ posts }) {
-	const { setSelectedHeaderItem } = useContext(LoadingContext)
+	const { setSelectedHeaderItem } = useContext(Context)
 	setSelectedHeaderItem("recentes")
 
 	return (

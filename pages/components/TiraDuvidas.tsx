@@ -29,7 +29,7 @@ const TiraDuvidas = () => {
 					</svg>
 				</div>
 				<div className="Image">
-					<Image src={"/home/test4.svg"} height={450} width={450} />
+					<Image src={"/home/duvida.svg"} height={450} width={450} />
 				</div>
 			</div>
 		</Container>

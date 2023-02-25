@@ -30,7 +30,7 @@ const Contribua = () => {
 					</svg>
 				</div>
 				<div className="Image">
-					<Image src={"/home/test5.svg"} height={450} width={450} />
+					<Image src={"/home/discussao.svg"} height={450} width={450} />
 				</div>
 			</div>
 		</Container>

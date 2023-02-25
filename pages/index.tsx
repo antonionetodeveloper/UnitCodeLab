@@ -1,6 +1,6 @@
 import Head from "next/head"
 import { useContext } from "react"
-import LoadingContext from "./context/Context"
+import Context from "./context/Context"
 
 import { Main } from "./style"
 
@@ -14,7 +14,7 @@ import ApiSection from "./components/Api"
 import Footer from "../components/Footer"
 
 export default function Index() {
-	const { setSelectedHeaderItem } = useContext(LoadingContext)
+	const { setSelectedHeaderItem } = useContext(Context)
 	setSelectedHeaderItem("inicio")
 
 	return (

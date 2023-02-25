@@ -1,21 +1,16 @@
 import { createContext, useState } from "react"
-import { LoadingContextType } from "../../types/LoadingContextType"
+import { ContextType } from "../../types/ContextType"
 
-const LoadingContext = createContext<LoadingContextType>(
-	{} as LoadingContextType,
-)
+const Context = createContext<ContextType>({} as ContextType)
 
 // eslint-disable-next-line react/prop-types
-export function Context({ children }) {
-	const [loading, setLoading] = useState(true)
+export function ContextProvider({ children }) {
 	const [auth, setAuth] = useState(false)
 	const [selectedHeaderItem, setSelectedHeaderItem] = useState("inicio")
 
 	return (
-		<LoadingContext.Provider
+		<Context.Provider
 			value={{
-				loading,
-				setLoading,
 				auth,
 				setAuth,
 				selectedHeaderItem,
@@ -23,8 +18,8 @@ export function Context({ children }) {
 			}}
 		>
 			{children}
-		</LoadingContext.Provider>
+		</Context.Provider>
 	)
 }
 
-export default LoadingContext
+export default Context

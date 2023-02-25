@@ -6,10 +6,10 @@ import { Container } from "./style"
 import { API_URL } from "../../_document"
 import PostList from "../components/PostList"
 import { useContext } from "react"
-import LoadingContext from "../../context/Context"
+import Context from "../../context/Context"
 
 export default function Relevantes({ posts }) {
-	const { setSelectedHeaderItem } = useContext(LoadingContext)
+	const { setSelectedHeaderItem } = useContext(Context)
 	setSelectedHeaderItem("relevantes")
 
 	return (

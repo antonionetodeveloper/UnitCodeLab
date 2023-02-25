@@ -50,7 +50,6 @@ const Container = styled.div`
 				font-weight: 900;
 				font-size: 1.2vw;
 				text-align: justify;
-				word-spacing: -5px;
 			}
 
 			span {
