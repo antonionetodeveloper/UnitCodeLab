@@ -5,14 +5,17 @@ import axios from "axios"
 import { API_URL } from "../../pages/_document"
 import { Item } from "./Item"
 import Container from "./style"
+import Loader from "../Loader"
 
 /* eslint-disable react/no-unknown-property */
 const Search = () => {
 	const [search, setSearch] = useState("")
+	const [isSearching, setIsSearching] = useState(false)
 	const [arraySearchs, setArraySearchs] = useState([])
 
 	useEffect(() => {
 		SearchHandle(search)
+		setIsSearching(true)
 	}, [search])
 
 	const capitalize = (str: string) =>
@@ -32,6 +35,8 @@ const Search = () => {
 					} else {
 						setArraySearchs(response.data.message)
 					}
+
+					setIsSearching(false)
 				})
 				.catch((error) => {
 					console.log("Erro  ==> ", error)
@@ -89,7 +94,9 @@ const Search = () => {
 			{search.length > 0 ? (
 				<div className="options">
 					<ul>
-						{typeof arraySearchs != "string" ? (
+						{isSearching ? (
+							<Loader little />
+						) : typeof arraySearchs != "string" ? (
 							arraySearchs.map(
 								(item: { title: string; author: string; _id: number }) => (
 									<Item

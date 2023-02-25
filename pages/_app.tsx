@@ -4,8 +4,7 @@ import { useEffect, useState } from "react"
 import { ThemeProvider, DefaultTheme } from "styled-components"
 import Loader from "../components/Loader"
 import GlobalStyle from "../styles/GlobalStyle"
-import { Context } from "./context/Context"
-import DisplayContainer from "./_loadContainer"
+import { ContextProvider } from "./context/Context"
 
 const theme: DefaultTheme = {
 	colors: {
@@ -38,13 +37,11 @@ export default function App({ Component, pageProps }: AppProps) {
 	return (
 		<ThemeProvider theme={theme}>
 			<GlobalStyle />
-			<Context>
-				{loading ? (
-					<Loader />
-				) : (
-					<DisplayContainer Component={Component} pageProps={pageProps} />
-				)}
-			</Context>
+			<ContextProvider>
+				<ContextProvider>
+					{loading ? <Loader /> : <Component {...pageProps} />}
+				</ContextProvider>
+			</ContextProvider>
 		</ThemeProvider>
 	)
 }
