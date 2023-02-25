@@ -3,9 +3,9 @@ import styled from "styled-components"
 // credits: Made by @Nawsome
 // https://uiverse.io/Nawsome/cold-liger-90
 
-const Loader = () => {
+const Loader = ({ little }: { little?: boolean }) => {
 	return (
-		<Container>
+		<Container isLittle={little}>
 			<div className="boxes">
 				<div className="box">
 					<div></div>
@@ -36,9 +36,9 @@ const Loader = () => {
 	)
 }
 
-const Container = styled.div`
-	width: 100vw;
-	height: 100vh;
+const Container: any = styled.div`
+	width: ${(props: any) => (props.isLittle ? "25vw" : "100vw")};
+	height: ${(props: any) => (props.isLittle ? "15vh" : "100vh")};
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -46,7 +46,7 @@ const Container = styled.div`
 	z-index: 3;
 
 	.boxes {
-		--size: 32px;
+		--size: ${(props: any) => (props.isLittle ? "20px" : "32px")};
 		--duration: 800ms;
 		height: calc(var(--size) * 2);
 		width: calc(var(--size) * 3);
