@@ -1,6 +1,6 @@
 import Head from "next/head"
 import { useContext } from "react"
-import Context from "./context/Context"
+import Context from "../context/Context"
 
 import { Main } from "./style"
 

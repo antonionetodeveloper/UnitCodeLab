@@ -5,7 +5,7 @@ import styled from "styled-components"
 const Comments = ({ Comments }) => {
 	return (
 		<Container>
-			{Comments.map((comment) => (
+			{Comments?.map((comment) => (
 				<ul>
 					<li>
 						<h6>{comment.Comment}</h6>

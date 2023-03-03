@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { useContext } from "react"
 import styled from "styled-components"
-import Context from "../pages/context/Context"
+import Context from "../context/Context"
 import RegularButton from "./Buttons/RegularButton"
 import Search from "./search/Search"
 

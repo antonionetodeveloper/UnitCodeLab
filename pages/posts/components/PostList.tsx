@@ -4,12 +4,12 @@ import Link from "next/link"
 import styled from "styled-components"
 
 const PostList = ({ Posts }) => {
-	const ArrayPosts = Posts.Posts
+	const ArrayPosts = Posts
 
 	return (
 		<Container>
 			<ul>
-				{ArrayPosts.map(
+				{ArrayPosts?.map(
 					(item: { title: string; _id: number; author: string }) => (
 						<Link href={`/posts/post/${item._id}`}>
 							<a href={`/posts/post/${item._id}`}>

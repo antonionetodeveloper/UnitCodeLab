@@ -5,7 +5,7 @@ import { API_URL } from "../../_document"
 import Comments from "./components/Comments"
 import Header from "../../../components/Header"
 import { useContext } from "react"
-import Context from "../../context/Context"
+import Context from "../../../context/Context"
 import { GetStaticPaths, GetStaticProps } from "next"
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -13,7 +13,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 	const Data = await response.json()
 	const IDs = Data.Data
 
-	const paths = IDs.map((ID: string) => ({ params: { post_ID: ID } }))
+	const paths = IDs?.map((ID: string) => ({ params: { post_ID: ID } }))
 	return {
 		paths,
 		fallback: true,
@@ -39,7 +39,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 }
 
 export default function Post({ post }) {
-	const Post = post.Post
+	const Post = post?.Post
 
 	const { setSelectedHeaderItem } = useContext(Context)
 	setSelectedHeaderItem("none")
@@ -48,14 +48,14 @@ export default function Post({ post }) {
 		<>
 			<Header />
 			<Container>
-				<h4>Título: {Post.title}</h4>
-				<p>Conteúdo: {Post.content}</p>
-				<span>Autor: {Post.author}</span>
-				<span>Quantidade de comentários: {Post.commentsCount}</span>
+				<h4>Título: {Post?.title}</h4>
+				<p>Conteúdo: {Post?.content}</p>
+				<span>Autor: {Post?.author}</span>
+				<span>Quantidade de comentários: {Post?.commentsCount}</span>
 				<div>
-					<Comments Comments={Post.comments} />
+					<Comments Comments={Post?.comments} />
 				</div>
-				<span>Ultima atualização em: {Post.updatedAt}</span>
+				<span>Ultima atualização em: {Post?.updatedAt}</span>
 			</Container>
 		</>
 	)

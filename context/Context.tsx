@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useState } from "react"
-import { ContextType } from "../../types/ContextType"
+import { ContextType } from "../types/ContextType"
 
 const Context = createContext<ContextType>({} as ContextType)
 
