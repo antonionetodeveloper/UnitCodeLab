@@ -5,9 +5,10 @@ import Head from "next/head"
 import { API_URL } from "../../_document"
 import PostList from "../components/PostList"
 import { useContext } from "react"
-import Context from "../../context/Context"
+import Context from "../../../context/Context"
 
 export default function Recentes({ posts }) {
+	const Posts = posts?.Posts
 	const { setSelectedHeaderItem } = useContext(Context)
 	setSelectedHeaderItem("recentes")
 
@@ -21,7 +22,7 @@ export default function Recentes({ posts }) {
 
 			<Container>
 				<h2>Discussões recentes!</h2>
-				<PostList Posts={posts} />
+				<PostList Posts={Posts} />
 			</Container>
 		</>
 	)

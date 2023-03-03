@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { ThemeProvider, DefaultTheme } from "styled-components"
 import Loader from "../components/Loader"
 import GlobalStyle from "../styles/GlobalStyle"
-import { ContextProvider } from "./context/Context"
+import { ContextProvider } from "../context/Context"
 
 const theme: DefaultTheme = {
 	colors: {
