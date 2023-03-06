@@ -28,8 +28,6 @@ export const SignUp = () => {
 			})
 			.then((res) => {
 				if (res.status === 201) {
-					console.log(res)
-
 					setLoginRegister("")
 					setPasswordRegister("")
 

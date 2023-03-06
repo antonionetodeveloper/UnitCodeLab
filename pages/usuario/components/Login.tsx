@@ -25,8 +25,6 @@ export const Login = () => {
 			})
 			.then((res) => {
 				if (res.status === 200) {
-					console.log(res)
-
 					setLogin("")
 					setPassword("")
 

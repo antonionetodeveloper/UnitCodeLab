@@ -38,9 +38,6 @@ const Search = () => {
 
 					setIsSearching(false)
 				})
-				.catch((error) => {
-					console.log("Erro  ==> ", error)
-				})
 		}
 	}
 
