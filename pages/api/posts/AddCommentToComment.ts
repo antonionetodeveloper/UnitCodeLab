@@ -1,38 +1,42 @@
 import { CORS } from "./../../../middleware/Cors"
-import { PostModule } from "./../../../models/posts"
 import { ConnectDB } from "../../../middleware/ConnectDB"
 import { NextApiRequest, NextApiResponse } from "next"
+import { waterfallAnswearModule } from "../../../models/waterfall_answear"
+import { formatDate } from "./formatDate/service"
 
 const CreatePost = async (
 	request: NextApiRequest,
 	response: NextApiResponse,
 ) => {
-	if (request.method == "PUT") {
-		const { PostID, CommentIndex, Comment } = await request.body
-		const Post = await PostModule.findById(PostID)
+	if (request.method == "POST") {
+		const { CommentID, Author, Content } = await request.body
 
-		if (!PostID || !Post) {
+		if (!CommentID) {
 			return response
 				.status(400)
 				.json({ error: "ID não identificada corretamente." })
 		}
 
-		if (!Comment || typeof Comment != "string") {
+		if (!Author) {
+			return response.status(400).json({ error: "Faça o login antes." })
+		}
+
+		if (!Content || typeof Content != "string") {
 			return response.status(400).json({ error: "Comentário inválido." })
 		}
 
 		try {
-			const currentDate = new Date()
-			const commentID = PostID + " " + currentDate
+			const commentsCount = await waterfallAnswearModule.count({ ID: /@/ })
+			const newCommentID = CommentID + "@" + commentsCount
 
-			Post.comments[CommentIndex].nextLevel.push({
-				commentID,
-				Comment,
-			})
-			Post.commentsCount += 1
-			Post.updatedAt = new Date()
+			const Comment = {
+				ID: newCommentID,
+				content: Content,
+				author: Author,
+			}
 
-			await PostModule.findByIdAndUpdate({ _id: PostID }, Post)
+			await waterfallAnswearModule.create(Comment)
+
 			return response
 				.status(201)
 				.json({ message: "Comentário adicionado com sucesso." })

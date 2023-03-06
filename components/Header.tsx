@@ -47,10 +47,10 @@ const Header = () => {
 				<div>
 					{auth ? (
 						<>
-							<Link href="/">
+							<Link href="/usuario/dashboard">
 								<RegularButton>Criar uma discussão</RegularButton>
 							</Link>
-							<Link href="/">
+							<Link href="/usuario/dashboard">
 								<img src="/assets/user.png" alt="usuario" />
 							</Link>
 						</>

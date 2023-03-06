@@ -1,36 +1,42 @@
 import { CORS } from "./../../../middleware/Cors"
-import { PostModule } from "./../../../models/posts"
 import { ConnectDB } from "../../../middleware/ConnectDB"
 import { NextApiRequest, NextApiResponse } from "next"
+import { primaryAnswearModule } from "../../../models/primary_answear"
+import { formatDate } from "./formatDate/service"
 
 const CreatePost = async (
 	request: NextApiRequest,
 	response: NextApiResponse,
 ) => {
-	if (request.method == "PUT") {
-		const { PostID, Comment } = await request.body
-		const Post = await PostModule.findById(PostID)
+	if (request.method == "POST") {
+		const { PostID, Author, Content } = await request.body
 
-		if (!PostID || !Post) {
+		if (!PostID) {
 			return response
 				.status(400)
 				.json({ error: "ID não identificada corretamente." })
 		}
 
-		if (!Comment || typeof Comment != "string") {
+		if (!Author) {
+			return response.status(400).json({ error: "Faça o login antes." })
+		}
+
+		if (!Content || typeof Content != "string") {
 			return response.status(400).json({ error: "Comentário inválido." })
 		}
 
 		try {
-			const currentDate = new Date()
-			const commentID = PostID + " " + currentDate
-			const CommentIndex = Post.comments.length
+			const commentsCount = await primaryAnswearModule.count({ ID: /@/ })
+			const commentID = PostID + "@" + commentsCount
 
-			Post.comments.push({ commentID, CommentIndex, Comment, nextLevel: [] })
-			Post.commentsCount += 1
-			Post.updatedAt = new Date()
+			const Comment = {
+				ID: commentID,
+				content: Content,
+				author: Author,
+			}
 
-			await PostModule.findByIdAndUpdate({ _id: PostID }, Post)
+			await primaryAnswearModule.create(Comment)
+
 			return response
 				.status(201)
 				.json({ message: "Comentário adicionado com sucesso." })

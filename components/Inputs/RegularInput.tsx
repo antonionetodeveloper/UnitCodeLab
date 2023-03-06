@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-export const RegularInput = ({ setValue, placeholder, type }: any) => {
+export const RegularInput = ({ setValue, placeholder, type, value }: any) => {
 	return (
 		<Container>
 			<div className="textInputWrapper">
@@ -11,6 +11,7 @@ export const RegularInput = ({ setValue, placeholder, type }: any) => {
 					onChange={(event) => {
 						setValue(event.target.value)
 					}}
+					value={value}
 				/>
 			</div>
 		</Container>

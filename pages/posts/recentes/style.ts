@@ -2,9 +2,13 @@ import styled from "styled-components"
 
 export const Container = styled.main`
 	padding-top: 15vh;
-	min-height: 90vh;
-	background-color: #051826;
+	min-height: 85vh;
 	color: white;
+
+	background-image: url("/posts/postBG.svg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
 
 	display: flex;
 	flex-direction: column;

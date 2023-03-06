@@ -37,6 +37,14 @@ const Container = styled.main`
 			justify-content: center;
 			align-items: center;
 			margin-top: 2vw;
+
+			span {
+				color: red;
+				top: 1vh;
+				position: relative;
+				max-width: 30vw;
+				text-align: center;
+			}
 		}
 
 		button {

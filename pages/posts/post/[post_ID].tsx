@@ -48,14 +48,27 @@ export default function Post({ post }) {
 		<>
 			<Header />
 			<Container>
-				<h4>Título: {Post?.title}</h4>
-				<p>Conteúdo: {Post?.content}</p>
-				<span>Autor: {Post?.author}</span>
-				<span>Quantidade de comentários: {Post?.commentsCount}</span>
-				<div>
-					<Comments Comments={Post?.comments} />
-				</div>
-				<span>Ultima atualização em: {Post?.updatedAt}</span>
+				<section>
+					<div className="box">
+						<div>
+							<h4>Título: {Post?.title}</h4>
+							<span>Autor: {Post?.author}</span>
+						</div>
+						<p>Conteúdo: {Post?.content}</p>
+					</div>
+
+					<div className="obs">
+						<span>Quantidade de comentários: {Post?.commentsCount}</span>
+						<span className="updatedAt">
+							Ultima atualização: {post?.FormatedDate}
+						</span>
+					</div>
+				</section>
+
+				<section className="comments">
+					<div className="addComment"></div>
+					<Comments Comments={post?.Comments} />
+				</section>
 			</Container>
 		</>
 	)
