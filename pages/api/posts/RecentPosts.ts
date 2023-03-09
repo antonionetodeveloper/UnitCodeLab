@@ -12,16 +12,12 @@ const GetRecentPosts = async (
 		const Posts = await PostModule.find().sort({ updatedAt: -1 }).limit(10)
 
 		if (!Posts) {
-			return response
-				.status(400)
-				.json({ error: "Não foi possivel encontrar os posts." })
+			return response.status(400).json({ success: false })
 		}
 
-		return response
-			.status(200)
-			.json({ message: "Posts encontrados com sucesso!", Posts })
+		return response.status(200).json({ success: true, Posts })
 	}
-	return response.status(405).json({ error: "Método inválido." })
+	return response.status(405).json({ success: false })
 }
 
 export default CORS(ConnectDB(GetRecentPosts))

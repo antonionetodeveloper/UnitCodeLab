@@ -6,7 +6,7 @@ import { NextApiRequest, NextApiResponse } from "next"
 import { UserModule } from "../../../models/users"
 import md5 from "md5"
 
-const CreatePost = async (
+const CreateAccount = async (
 	request: NextApiRequest,
 	response: NextApiResponse,
 ) => {
@@ -24,19 +24,20 @@ const CreatePost = async (
 		) {
 			return response
 				.status(400)
-				.json({ error: "Dados não informados Corretamente." })
+				.json({ success: false, error: "Dados não informados Corretamente." })
 		}
 
 		const repeatedLogins = await UserModule.find({ login: Login })
 		if (repeatedLogins && repeatedLogins.length > 0) {
 			return response
 				.status(400)
-				.json({ error: "Este login já está sendo usado." })
+				.json({ success: false, error: "Este login já está sendo usado." })
 		}
 
 		const repeatedName = await UserModule.find({ name: Name })
 		if (repeatedName && repeatedName.length > 0) {
 			return response.status(400).json({
+				success: false,
 				error: "Tente usar outro nome, para te diferenciar.",
 			})
 		}
@@ -45,7 +46,7 @@ const CreatePost = async (
 		if (repeatedNames && repeatedNames.length > 0) {
 			return response
 				.status(400)
-				.json({ error: "Este Nome já está sendo usado." })
+				.json({ success: false, error: "Este Nome já está sendo usado." })
 		}
 
 		try {
@@ -63,16 +64,15 @@ const CreatePost = async (
 			})
 			const foundSingleUser = foundUsers[0]
 			const token = jwt.sign({ _id: foundSingleUser._id }, JWT_KEY_TOKEN)
-			return response
-				.status(201)
-				.json({ message: "Conta criada com sucesso.", token })
+			return response.status(201).json({ success: true, token })
 		} catch (error) {
-			return response
-				.status(400)
-				.json({ error: "Erro ao tentar criar conta. ERROR -> " + error })
+			return response.status(400).json({
+				success: false,
+				error: "Erro ao tentar criar conta. ERROR -> " + error,
+			})
 		}
 	}
 	return response.status(405).json({ error: "Método inválido." })
 }
 
-export default CORS(ConnectDB(CreatePost))
+export default CORS(ConnectDB(CreateAccount))

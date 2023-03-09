@@ -12,7 +12,7 @@ const GetIdPosts = async (
 		const Data = AllPosts.map((item) => item._id)
 		return response.status(200).json({ Data })
 	}
-	return response.status(405).json({ error: "Método inválido." })
+	return response.status(405).json({ success: false })
 }
 
 export default CORS(ConnectDB(GetIdPosts))

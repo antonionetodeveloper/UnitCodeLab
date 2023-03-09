@@ -18,14 +18,20 @@ const UserEndpoint = async (
 			User.login = null
 			User.password = null
 
-			return response
-				.status(200)
-				.json({ message: "Usuário encontrado com sucesso!", User })
+			return response.status(200).json({
+				success: true,
+				message: "Usuário encontrado com sucesso!",
+				User,
+			})
 		} catch (error) {
-			return response.status(400).json({ error: "Erro. -> " + error })
+			return response
+				.status(400)
+				.json({ success: false, error: "Erro. -> " + error })
 		}
 	}
-	return response.status(405).json({ error: "Método inválido." })
+	return response
+		.status(405)
+		.json({ success: false, error: "Método inválido." })
 }
 
 export default validateTokenJWT(CORS(ConnectDB(UserEndpoint)))

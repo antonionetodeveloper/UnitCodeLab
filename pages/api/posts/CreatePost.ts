@@ -41,9 +41,9 @@ const CreatePost = async (
 
 		await PostModule.create(POST)
 
-		return response.status(201).json({ message: "Post criado com sucesso!!!" })
+		return response.status(201).json({ success: true })
 	}
-	return response.status(405).json({ error: "Método inválido." })
+	return response.status(405).json({ success: false })
 }
 
 export default CORS(ConnectDB(CreatePost))

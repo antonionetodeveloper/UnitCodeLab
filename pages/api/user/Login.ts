@@ -8,7 +8,10 @@ import md5 from "md5"
 const endPointLogin = async (req: NextApiRequest, res: NextApiResponse) => {
 	const { JWT_KEY_TOKEN } = process.env
 	if (!JWT_KEY_TOKEN) {
-		res.status(500).json({ error: "JWT key token não informada corretamente." })
+		res.status(500).json({
+			success: false,
+			error: "JWT key token não informada corretamente.",
+		})
 	}
 
 	if (req.method === "POST") {
@@ -23,14 +26,16 @@ const endPointLogin = async (req: NextApiRequest, res: NextApiResponse) => {
 			if (foundUsers && foundUsers.length > 0) {
 				const foundSingleUser = foundUsers[0]
 				const token = jwt.sign({ _id: foundSingleUser._id }, JWT_KEY_TOKEN)
-				return res.status(200).json({ token })
+				return res.status(200).json({ success: true, token })
 			} else {
-				return res.status(400).json({ error: "Usuário ou senha inválidos." })
+				return res
+					.status(400)
+					.json({ success: false, error: "Usuário ou senha inválidos." })
 			}
 		} catch (error) {
-			console.log(error)
+			return res.status(400).json({ success: false, error })
 		}
 	}
-	return res.status(405).json({ error: "Metodo inválido." })
+	return res.status(405).json({ success: false, error: "Metodo inválido." })
 }
 export default CORS(ConnectDB(endPointLogin))

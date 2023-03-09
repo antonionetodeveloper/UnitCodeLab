@@ -23,7 +23,7 @@ const SearchEndPoint = async (
 
 		return response.status(200).json({ data })
 	} catch (error) {
-		return response.status(400).json({ error: "Error -> " + error })
+		return response.status(400).json({ success: false, error })
 	}
 }
 
