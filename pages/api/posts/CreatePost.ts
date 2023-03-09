@@ -41,7 +41,7 @@ const CreatePost = async (
 
 		await PostModule.create(POST)
 
-		return response.status(201).json({ success: true })
+		return response.status(201).json({ success: true, POST })
 	}
 	return response.status(405).json({ success: false })
 }
