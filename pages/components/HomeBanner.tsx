@@ -7,7 +7,7 @@ const HomeBanner = () => {
 	return (
 		<Container>
 			<div>
-				<h1>Bem-vindo à Unit Code Lab!</h1>
+				<h1>Bem-vindo à United Code Lab!</h1>
 				<p>
 					Forúm de programação, troca de experiências e discussões entre alunos
 					da Unit.

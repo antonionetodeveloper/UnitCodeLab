@@ -9,7 +9,7 @@ const Footer = () => {
 			<p>
 				O código é open source.{" "}
 				<a
-					href="https://github.com/antonionetodeveloper/UnitCodeLab"
+					href="https://github.com/antonionetodeveloper/UnitedCodeLab"
 					target="_blank"
 					rel="noreferrer"
 				>
