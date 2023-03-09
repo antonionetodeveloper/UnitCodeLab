@@ -21,13 +21,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
-	const response = await fetch(API_URL + "api/posts/SinglePost", {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify({ PostID: context.params.post_ID }),
-	})
+	const response = await fetch(API_URL + "api/posts/" + context.params.post_ID)
 	const postData = await response.json()
 
 	return {
@@ -40,6 +34,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
 export default function Post({ post }) {
 	const Post = post?.Post
+	console.log(post?.Comments.length)
 
 	const { setSelectedHeaderItem } = useContext(Context)
 	setSelectedHeaderItem("none")
@@ -51,10 +46,10 @@ export default function Post({ post }) {
 				<section>
 					<div className="box">
 						<div>
-							<h4>Título: {Post?.title}</h4>
-							<span>Autor: {Post?.author}</span>
+							<h4>{Post?.title}</h4>
+							<span>{Post?.author}</span>
 						</div>
-						<p>Conteúdo: {Post?.content}</p>
+						<p>{Post?.content}</p>
 					</div>
 
 					<div className="obs">
@@ -65,10 +60,14 @@ export default function Post({ post }) {
 					</div>
 				</section>
 
-				<section className="comments">
-					<div className="addComment"></div>
-					<Comments Comments={post?.Comments} />
-				</section>
+				{post?.Comments.length == 0 ? (
+					<></>
+				) : (
+					<section className="comments">
+						<div className="addComment"></div>
+						<Comments Comments={post?.Comments} />
+					</section>
+				)}
 			</Container>
 		</>
 	)
