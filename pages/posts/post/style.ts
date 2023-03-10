@@ -1,10 +1,11 @@
 import styled from "styled-components"
 
-export const Container = styled.main`
-	padding-top: 10vh;
-	min-height: 75vh;
+export const Container: any = styled.main`
+	padding-top: 15vh;
+	padding-bottom: ${(props: { hasComment: number }) =>
+		props.hasComment != 0 ? "5vh" : "0px"};
+	min-height: 85vh;
 	width: 100%;
-	padding: 15vh 0 5vw 0;
 
 	background-image: url("/posts/postBG.svg");
 	background-repeat: no-repeat;

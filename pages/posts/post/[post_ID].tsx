@@ -34,7 +34,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
 export default function Post({ post }) {
 	const Post = post?.Post
-	console.log(post?.Comments.length)
 
 	const { setSelectedHeaderItem } = useContext(Context)
 	setSelectedHeaderItem("none")
@@ -42,7 +41,7 @@ export default function Post({ post }) {
 	return (
 		<>
 			<Header />
-			<Container>
+			<Container hasComment={post?.Comments.length}>
 				<section>
 					<div className="box">
 						<div>

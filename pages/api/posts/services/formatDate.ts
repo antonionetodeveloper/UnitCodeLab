@@ -1,44 +1,42 @@
-export function formatDate(updatedAtDate) {
-	const postDate = Intl.DateTimeFormat("pt-BR", {
-		day: "numeric",
-		month: "numeric",
-		year: "numeric",
-	}).format(updatedAtDate)
+export function formatDate(updatedAt) {
+	const date = new Date(updatedAt)
+	const now = new Date()
 
-	const currentDate = Intl.DateTimeFormat("pt-BR", {
-		day: "numeric",
-		month: "numeric",
-		year: "numeric",
-	}).format(Date.now())
+	const diffInMilliseconds = now.getTime() - date.getTime()
+	const diffInSeconds = Math.floor(diffInMilliseconds / 1000)
 
-	const currentYear = parseInt(currentDate[7] + currentDate[8] + currentDate[9])
-	const postYear = parseInt(postDate[7] + postDate[8] + postDate[9])
-	if (currentYear > postYear) {
-		if (currentYear - postYear == 1) {
-			return "Ano passado"
-		} else {
-			return `Há ${currentYear - postYear} anos atrás`
-		}
+	let timeDescription = ""
+
+	if (diffInSeconds >= 31536000) {
+		const diffInYears = Math.floor(diffInSeconds / 31536000)
+		timeDescription = `${diffInYears} ${
+			diffInYears === 1 ? "ano" : "anos"
+		} atrás`
+	} else if (diffInSeconds >= 2592000) {
+		const diffInMonths = Math.floor(diffInSeconds / 2592000)
+		timeDescription = `${diffInMonths} ${
+			diffInMonths === 1 ? "mês" : "meses"
+		} atrás`
+	} else if (diffInSeconds >= 86400) {
+		const diffInDays = Math.floor(diffInSeconds / 86400)
+		timeDescription = `${diffInDays} ${diffInDays === 1 ? "dia" : "dias"} atrás`
+	} else if (diffInSeconds >= 3600) {
+		const diffInHours = Math.floor(diffInSeconds / 3600)
+		timeDescription = `${diffInHours} ${
+			diffInHours === 1 ? "hora" : "horas"
+		} atrás`
+	} else if (diffInSeconds >= 60) {
+		const diffInMinutes = Math.floor(diffInSeconds / 60)
+		timeDescription = `${diffInMinutes} ${
+			diffInMinutes === 1 ? "minuto" : "minutos"
+		} atrás`
+	} else if (diffInSeconds >= 1) {
+		timeDescription = `${diffInSeconds} ${
+			diffInSeconds === 1 ? "segundo" : "segundos"
+		} atrás`
+	} else {
+		timeDescription = "agora mesmo"
 	}
 
-	const currentMonth = parseInt(currentDate[3] + currentDate[4])
-	const postMonth = parseInt(postDate[3] + postDate[4])
-	if (currentMonth - postMonth > 1) {
-		return `Há ${currentMonth - postMonth} meses atrás`
-	}
-	if (currentMonth - postMonth == 1) {
-		return "Mês passado"
-	}
-
-	const currentDay = parseInt(currentDate[0] + currentDate[1])
-	const postDay = parseInt(postDate[0] + postDate[1])
-	if (currentDay - postDay > 1) {
-		return `Há ${currentDay - postDay} dias atrás`
-	}
-	if (currentDay - postDay == 1) {
-		return "Ontem"
-	}
-	if (currentDay - postDay == 0) {
-		return "Hoje"
-	}
+	return timeDescription
 }
