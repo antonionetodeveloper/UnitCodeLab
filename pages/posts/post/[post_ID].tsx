@@ -62,8 +62,8 @@ export default function Post({ post }) {
 
 		await axios
 			.post(API_URL + `api/posts/${PostId}/addComment`, CommentData)
-			.then(() => {
-				fetch(API_URL + "api/revalidate?secret=" + REVALIDATE_SECRET)
+			.then(async () => {
+				await fetch(API_URL + "api/revalidate?secret=" + REVALIDATE_SECRET)
 				Router.reload()
 				setLoading(false)
 			})
