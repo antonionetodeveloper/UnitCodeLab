@@ -9,7 +9,6 @@ import { formatDate } from "../services/formatDate"
 const GetPost = async (request: NextApiRequest, response: NextApiResponse) => {
 	if (request.method == "GET") {
 		const post_id = await request.query
-		console.log(post_id)
 
 		try {
 			const Post = await PostModule.findOne({ _id: post_id.id })
@@ -23,7 +22,6 @@ const GetPost = async (request: NextApiRequest, response: NextApiResponse) => {
 				success: true,
 				Post,
 				Comments: AllComments,
-				FormatedDate: formatDate(Post.updatedAt),
 			})
 		} catch (error) {
 			return response

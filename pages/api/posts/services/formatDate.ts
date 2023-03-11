@@ -30,10 +30,6 @@ export function formatDate(updatedAt) {
 		timeDescription = `${diffInMinutes} ${
 			diffInMinutes === 1 ? "minuto" : "minutos"
 		} atrás`
-	} else if (diffInSeconds >= 1) {
-		timeDescription = `${diffInSeconds} ${
-			diffInSeconds === 1 ? "segundo" : "segundos"
-		} atrás`
 	} else {
 		timeDescription = "agora mesmo"
 	}

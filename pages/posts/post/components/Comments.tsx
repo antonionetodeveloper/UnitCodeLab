@@ -1,77 +1,256 @@
-/* eslint-disable no-var */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-key */
-import styled from "styled-components"
+import axios from "axios"
+import Router from "next/router"
+import { useState } from "react"
+import { CommentType } from "../../../../types/Comment"
 import { formatDate } from "../../../api/posts/services/formatDate"
+import { API_URL } from "../../../_document"
+import AddComment from "./addComment"
+import styled, { DefaultTheme, StyledComponent } from "styled-components"
 
-const Comments = ({ Comments }) => {
-	console.log(Comments)
-	console.log(formatDate(Date.parse(Comments[0].children[2].updatedAt)))
+const Comments = ({ post }) => {
+	// eu tentei fazer isso não parecer uma bagunça...
+	// simplesmente impossivel de fazer isso.
+
+	const Comments = post?.Comments
+
+	const [addCommentVisible, setAddCommentVisible] = useState("none")
+	const [loading, setLoading] = useState(false)
+
+	const [commentID, setCommentId] = useState("")
+	const [comment, setComment] = useState("")
+	const [reference, setReference] = useState(null)
+
+	const PostId = post?.Post?._id
+	const author = "Um cara legal!"
+
+	const addComment = async () => {
+		setLoading(true)
+
+		const CommentData = {
+			PostID: PostId,
+			Content: comment,
+			Author: author,
+			Reference: reference,
+		}
+
+		const REVALIDATE_SECRET = process.env.NEXT_PUBLIC_REVALIDATE_SECRET
+		await axios
+			.post(API_URL + `api/posts/${commentID}/addComment`, CommentData)
+			.then(() => {
+				fetch(API_URL + "api/revalidate?secret=" + REVALIDATE_SECRET)
+				Router.reload()
+				setLoading(false)
+			})
+			.catch((err) => {
+				alert(err.data.error)
+				setLoading(false)
+			})
+	}
 
 	return (
 		<>
 			{Comments ? (
 				<Container>
-					{Comments.map(
-						(Comment: {
-							content: string
-							author: string
-							ID: string
-							updatedAt: string
-							children: Array<object>
-						}) => (
-							<PaddingCommentContainer>
-								<div className="parent">
-									<p className="author">{Comment?.author}</p>
-									<span>:</span>
-									<p className="updatedAt">
-										{formatDate(Date.parse(Comment?.updatedAt))}
-									</p>
+					{Comments.map((Comment: CommentType) => (
+						<PaddingCommentContainer>
+							<CommentContainer
+								AddCommentVisible={addCommentVisible}
+								CommentID={Comment?.id}
+							>
+								<div className={`Container_` + Comment?.id}>
+									<div className="parent">
+										<div>
+											<p className="author">{Comment?.author}</p>
+											<span>:</span>
+											<p className="updatedAt">
+												{formatDate(Date.parse(Comment?.updatedAt))}
+											</p>
+										</div>
+										<p>{Comment?.content}</p>
+									</div>
+									{addCommentVisible == "none" ? (
+										<button
+											onClick={() => {
+												setAddCommentVisible(Comment?.id)
+												setCommentId(Comment?.id)
+											}}
+										>
+											<img
+												className="open"
+												src="/assets/chat.png"
+												alt="resposta"
+											/>
+											<img
+												className="close"
+												src="/assets/close.png"
+												alt="fechar"
+											/>
+										</button>
+									) : (
+										<button
+											onClick={() => {
+												setAddCommentVisible("none")
+												setComment("")
+												setCommentId("")
+												setReference(null)
+											}}
+										>
+											<img
+												className="open"
+												src="/assets/chat.png"
+												alt="resposta"
+											/>
+											<img
+												className="close"
+												src="/assets/close.png"
+												alt="fechar"
+											/>
+										</button>
+									)}
 								</div>
-								<p>{Comment?.content}</p>
-								{Comment.children.length > 0 ? (
-									Comment.children.map(
-										(ChildComment: {
-											content: string
-											author: string
-											reference: string
-											updatedAt: string
-											ID: string
-										}) => (
-											<PaddingCommentContainer>
-												<div>
-													<div className="header">
-														<p className="author">{ChildComment?.author}</p>
-														<span>:</span>
-														<p className="updatedAt">
-															{formatDate(Date.parse(ChildComment?.updatedAt))}
-														</p>
+								<AddComment
+									submit={() => {
+										addComment()
+									}}
+									comment={comment}
+									setComment={setComment}
+									loading={loading}
+								/>
+							</CommentContainer>
+
+							{Comment?.children?.length > 0
+								? Comment?.children?.map((ChildComment: CommentType) => (
+										<PaddingCommentContainer>
+											<CommentContainer
+												AddCommentVisible={addCommentVisible}
+												CommentID={ChildComment?._id}
+											>
+												<div className={`Container_` + ChildComment?._id}>
+													<div className="parent">
+														<div className="header">
+															<p className="author">{ChildComment?.author}</p>
+															<span>:</span>
+															<p className="updatedAt">
+																{formatDate(
+																	Date.parse(ChildComment?.updatedAt),
+																)}
+															</p>
+														</div>
+														{ChildComment?.reference != null ? (
+															<p className="reference">
+																{ChildComment?.reference?.substring(0, 30)} ...
+															</p>
+														) : null}
+														<p>{ChildComment?.content}</p>
 													</div>
-													{ChildComment?.reference != null ? (
-														<p className="reference">
-															{ChildComment?.reference.substring(0, 20)} ...
-														</p>
-													) : null}
+													{addCommentVisible == "none" ? (
+														<button
+															onClick={() => {
+																setAddCommentVisible(ChildComment?._id)
+																setCommentId(Comment?.id)
+																setReference(ChildComment?.content)
+															}}
+														>
+															<img
+																className="open"
+																src="/assets/chat.png"
+																alt="resposta"
+															/>
+															<img
+																className="close"
+																src="/assets/close.png"
+																alt="fechar"
+															/>
+														</button>
+													) : (
+														<button
+															onClick={() => {
+																setAddCommentVisible("none")
+																setComment("")
+																setCommentId("")
+																setReference(null)
+															}}
+														>
+															<img
+																className="open"
+																src="/assets/chat.png"
+																alt="resposta"
+															/>
+															<img
+																className="close"
+																src="/assets/close.png"
+																alt="fechar"
+															/>
+														</button>
+													)}
 												</div>
-												<p>{ChildComment?.content}</p>
-											</PaddingCommentContainer>
-										),
-									)
-								) : (
-									<></>
-								)}
-							</PaddingCommentContainer>
-						),
-					)}
+												<AddComment
+													submit={() => addComment()}
+													comment={comment}
+													setComment={setComment}
+													loading={loading}
+												/>
+											</CommentContainer>
+										</PaddingCommentContainer>
+								  ))
+								: null}
+						</PaddingCommentContainer>
+					))}
 				</Container>
-			) : (
-				<></>
-			)}
+			) : null}
 		</>
 	)
 }
 
-const PaddingCommentContainer: any = styled.div`
+export const CommentContainer: StyledComponent<
+	"div",
+	DefaultTheme,
+	{ AddCommentVisible?: string; CommentID?: string },
+	never
+> = styled.div`
+	${(props: any): any => `.Container_${props.CommentID}`} {
+		display: flex;
+		justify-content: space-between;
+
+		button {
+			width: 50px;
+			height: 50px;
+			padding: 10px;
+			border-radius: 50%;
+			background-color: #041a29;
+			transition: 300ms;
+
+			:hover {
+				background-color: #fff;
+				cursor: pointer;
+			}
+
+			img {
+				width: 30px;
+			}
+
+			.open {
+				display: ${(props: any): any =>
+					props.AddCommentVisible === props.CommentID ? "none" : "flex"};
+			}
+			.close {
+				display: ${(props: any): any =>
+					props.AddCommentVisible === props.CommentID ? "flex" : "none"};
+			}
+		}
+	}
+
+	.addComment {
+		display: ${(props: any): any =>
+			props.AddCommentVisible === props.CommentID ? "flex" : "none"};
+
+		flex-direction: column;
+	}
+`
+
+export const PaddingCommentContainer = styled.div`
 	border-radius: 10px;
 	padding: 1vw;
 
@@ -85,9 +264,12 @@ const PaddingCommentContainer: any = styled.div`
 	gap: 1vw;
 
 	.parent {
-		display: flex;
-		flex-direction: row;
-		gap: 10px;
+		display: block;
+
+		div {
+			display: flex;
+			gap: 5px;
+		}
 
 		.updatedAt {
 			color: #ccc;
@@ -108,7 +290,7 @@ const PaddingCommentContainer: any = styled.div`
 	}
 `
 
-const Container = styled.section`
+export const Container = styled.section`
 	color: #fff;
 	display: flex;
 	flex-direction: column;

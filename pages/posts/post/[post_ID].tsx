@@ -4,9 +4,13 @@ import { Container } from "./style"
 import { API_URL } from "../../_document"
 import Comments from "./components/Comments"
 import Header from "../../../components/Header"
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import Context from "../../../context/Context"
 import { GetStaticPaths, GetStaticProps } from "next"
+import { formatDate } from "../../api/posts/services/formatDate"
+import AddComment from "./components/addComment"
+import axios from "axios"
+import Router from "next/router"
 
 export const getStaticPaths: GetStaticPaths = async () => {
 	const response = await fetch(API_URL + "api/posts/ShowIDposts")
@@ -28,7 +32,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
 		props: {
 			post: postData,
 		},
-		revalidate: 5, // 5 seconds
 	}
 }
 
@@ -38,10 +41,42 @@ export default function Post({ post }) {
 	const { setSelectedHeaderItem } = useContext(Context)
 	setSelectedHeaderItem("none")
 
+	const [loading, setLoading] = useState(false)
+	const [comment, setComment] = useState("")
+
+	const PostId = post?.Post?._id
+	const author = "Um cara legal!"
+
+	const addComment = async () => {
+		setLoading(true)
+
+		const CommentData = {
+			commentID: PostId,
+			PostID: PostId,
+			Content: comment,
+			Author: author,
+			Reference: null,
+		}
+
+		const REVALIDATE_SECRET = process.env.NEXT_PUBLIC_REVALIDATE_SECRET
+
+		await axios
+			.post(API_URL + `api/posts/${PostId}/addComment`, CommentData)
+			.then(() => {
+				fetch(API_URL + "api/revalidate?secret=" + REVALIDATE_SECRET)
+				Router.reload()
+				setLoading(false)
+			})
+			.catch((err) => {
+				alert(err.data.error)
+				setLoading(false)
+			})
+	}
+
 	return (
 		<>
 			<Header />
-			<Container hasComment={post?.Comments.length}>
+			<Container hasComment={post?.Comments?.length}>
 				<section>
 					<div className="box">
 						<div>
@@ -54,17 +89,22 @@ export default function Post({ post }) {
 					<div className="obs">
 						<span>Quantidade de comentários: {Post?.commentsCount}</span>
 						<span className="updatedAt">
-							Ultima atualização: {post?.FormatedDate}
+							Ultima atualização: {formatDate(Date.parse(Post?.updatedAt))}
 						</span>
 					</div>
 				</section>
 
-				{post?.Comments.length == 0 ? (
-					<></>
-				) : (
+				{post?.Comments?.length == 0 ? null : (
 					<section className="comments">
-						<div className="addComment"></div>
-						<Comments Comments={post?.Comments} />
+						<Comments post={post} />
+						<AddComment
+							submit={() => {
+								addComment()
+							}}
+							comment={comment}
+							setComment={setComment}
+							loading={loading}
+						/>
 					</section>
 				)}
 			</Container>
