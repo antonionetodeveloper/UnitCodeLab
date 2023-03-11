@@ -1,4 +1,5 @@
-export default async function handler(req, res) {
+import { CORS } from "./../../middleware/Cors"
+async function handler(req, res) {
 	const { PostID } = req.body
 
 	if (req.query.secret !== process.env.NEXT_PUBLIC_REVALIDATE_SECRET) {
@@ -12,3 +13,5 @@ export default async function handler(req, res) {
 		return res.status(500).send("Error revalidating")
 	}
 }
+
+export default CORS(handler)
