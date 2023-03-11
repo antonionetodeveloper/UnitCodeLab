@@ -39,7 +39,12 @@ const Comments = ({ post }) => {
 		await axios
 			.post(API_URL + `api/posts/${commentID}/addComment`, CommentData)
 			.then(async () => {
-				await fetch(API_URL + "api/revalidate?secret=" + REVALIDATE_SECRET)
+				await axios.post(
+					API_URL + `api/revalidate?secret=` + REVALIDATE_SECRET,
+					{
+						PostID: PostId,
+					},
+				)
 				Router.reload()
 				setLoading(false)
 			})
