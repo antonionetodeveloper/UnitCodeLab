@@ -18,6 +18,7 @@ const GetPost = async (request: NextApiRequest, response: NextApiResponse) => {
 				return response.status(404).json({ error: "Post não encontrado." })
 			}
 
+			await response.revalidate(`/posts/post/${post_id.id}`)
 			return response.status(200).json({
 				success: true,
 				Post,
