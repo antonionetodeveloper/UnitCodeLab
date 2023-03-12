@@ -35,6 +35,7 @@ const Comments = ({ postId, comments, addComment }) => {
 			(await addComment(CommentData, () => {
 				setComment("")
 				setCommentId("")
+				setAddCommentVisible("none")
 				setReference(null)
 			}))
 
