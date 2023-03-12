@@ -61,9 +61,16 @@ export default function Post({ post }) {
 		await axios
 			.post(API_URL + `api/posts/${PostId}/addComment`, CommentData)
 			.then(async () => {
-				await axios.get(API_URL + `api/revalidate?path=${PostId}`).then(() => {
-					Router.reload()
-				})
+				await axios
+					.get(API_URL + `api/revalidate?path=${PostId}`)
+					.then((response) => {
+						console.log(response)
+						// Router.reload()
+					})
+					.catch((error) => {
+						console.log(error)
+						// Router.reload()
+					})
 			})
 			.catch((err) => {
 				alert(err.data)
