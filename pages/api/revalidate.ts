@@ -1,13 +1,9 @@
 import { CORS } from "./../../middleware/Cors"
 async function handler(req, res) {
-	const { PostID } = req.body
-
-	if (req.query.secret !== process.env.NEXT_PUBLIC_REVALIDATE_SECRET) {
-		return res.status(401).json({ message: "Invalid token" })
-	}
+	const path = req.query.path
 
 	try {
-		await res.revalidate(`/posts/post/${PostID}`)
+		await res.revalidate(`/posts/post/${path}`)
 		return res.json({ success: true })
 	} catch (err) {
 		return res.status(500).send("Error revalidating")

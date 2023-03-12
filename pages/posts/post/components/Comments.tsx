@@ -36,13 +36,14 @@ const Comments = ({ post }) => {
 		}
 
 		await axios
-			.post(API_URL + `api/posts/${commentID}/addComment`, CommentData)
+			.post(API_URL + `api/posts/${PostId}/addComment`, CommentData)
 			.then(async () => {
-				Router.reload()
-				setLoading(false)
+				await axios.get(API_URL + `api/revalidate?path=${PostId}`).then(() => {
+					Router.reload()
+				})
 			})
 			.catch((err) => {
-				alert(err.data.error)
+				alert(err.data)
 				setLoading(false)
 			})
 	}

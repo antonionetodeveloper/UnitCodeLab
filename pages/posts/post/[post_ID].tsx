@@ -20,7 +20,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 	const paths = IDs?.map((ID: string) => ({ params: { post_ID: ID } }))
 	return {
 		paths,
-		fallback: true,
+		fallback: "blocking",
 	}
 }
 
@@ -61,11 +61,12 @@ export default function Post({ post }) {
 		await axios
 			.post(API_URL + `api/posts/${PostId}/addComment`, CommentData)
 			.then(async () => {
-				Router.reload()
-				setLoading(false)
+				await axios.get(API_URL + `api/revalidate?path=${PostId}`).then(() => {
+					Router.reload()
+				})
 			})
 			.catch((err) => {
-				alert(err.data.error)
+				alert(err.data)
 				setLoading(false)
 			})
 	}
