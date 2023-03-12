@@ -92,19 +92,17 @@ export default function Post({ post }) {
 					</div>
 				</section>
 
-				{post?.Comments?.length == 0 ? null : (
-					<section className="comments">
-						<Comments post={post} />
-						<AddComment
-							submit={() => {
-								addComment()
-							}}
-							comment={comment}
-							setComment={setComment}
-							loading={loading}
-						/>
-					</section>
-				)}
+				<section className="comments">
+					<Comments post={post} />
+					<AddComment
+						submit={() => {
+							addComment()
+						}}
+						comment={comment}
+						setComment={setComment}
+						loading={loading}
+					/>
+				</section>
 			</Container>
 		</>
 	)

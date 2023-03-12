@@ -2,8 +2,7 @@ import styled from "styled-components"
 
 export const Container: any = styled.main`
 	padding-top: 15vh;
-	padding-bottom: ${(props: { hasComment: number }) =>
-		props.hasComment != 0 ? "5vh" : "0px"};
+	padding-bottom: 5vh;
 	min-height: 85vh;
 	width: 100%;
 
