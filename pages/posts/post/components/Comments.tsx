@@ -35,16 +35,9 @@ const Comments = ({ post }) => {
 			Reference: reference,
 		}
 
-		const REVALIDATE_SECRET = process.env.NEXT_PUBLIC_REVALIDATE_SECRET
 		await axios
 			.post(API_URL + `api/posts/${commentID}/addComment`, CommentData)
 			.then(async () => {
-				await axios.post(
-					API_URL + `api/revalidate?secret=` + REVALIDATE_SECRET,
-					{
-						PostID: PostId,
-					},
-				)
 				Router.reload()
 				setLoading(false)
 			})
