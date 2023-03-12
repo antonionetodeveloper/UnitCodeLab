@@ -13,10 +13,10 @@ const AddComment = async (
 	response: NextApiResponse,
 ) => {
 	if (request.method == "POST") {
-		const { PostID, Author, Content, Reference } = await request.body
+		const { PostID, PostOwerID, Author, Content, Reference } =
+			await request.body
 
-		const CommentID = await request.query
-		const ParentID = CommentID.id == PostID ? null : CommentID.id
+		const ParentID = PostOwerID == PostID ? null : PostOwerID
 
 		const Post = await PostModule.findOne({ _id: PostID })
 
@@ -54,11 +54,11 @@ const AddComment = async (
 				await ParentComment.save()
 				await Post.save()
 
+				const AllComments = await CommentsModule.find({ post: PostID })
+
 				return response.status(201).json({
 					success: true,
-					data: {
-						Comment,
-					},
+					data: AllComments,
 				})
 			}
 
@@ -76,12 +76,11 @@ const AddComment = async (
 				await CommentsModule.create(Comment)
 				await Post.save()
 
-				await response.revalidate(`/posts/post/${PostID}`)
+				const AllComments = await CommentsModule.find({ post: PostID })
+
 				return response.status(201).json({
 					success: true,
-					data: {
-						Comment,
-					},
+					data: AllComments,
 				})
 			}
 		} catch (error) {

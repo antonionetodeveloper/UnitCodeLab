@@ -10,7 +10,6 @@ import { GetStaticPaths, GetStaticProps } from "next"
 import { formatDate } from "../../api/posts/services/formatDate"
 import AddComment from "./components/addComment"
 import axios from "axios"
-import Router from "next/router"
 
 export const getStaticPaths: GetStaticPaths = async () => {
 	const response = await fetch(API_URL + "api/posts/ShowIDposts")
@@ -20,7 +19,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 	const paths = IDs?.map((ID: string) => ({ params: { post_ID: ID } }))
 	return {
 		paths,
-		fallback: "blocking",
+		fallback: false,
 	}
 }
 
@@ -43,14 +42,15 @@ export default function Post({ post }) {
 
 	const [loading, setLoading] = useState(false)
 	const [comment, setComment] = useState("")
+	const [comments, setComments] = useState(post?.Comments || [])
 
 	const PostId = post?.Post?._id
 	const author = "Um cara legal!"
 
-	const addComment = async () => {
+	const addComment = async (body = null, callback = null) => {
 		setLoading(true)
 
-		const CommentData = {
+		const CommentData = body || {
 			commentID: PostId,
 			PostID: PostId,
 			Content: comment,
@@ -60,17 +60,12 @@ export default function Post({ post }) {
 
 		await axios
 			.post(API_URL + `api/posts/${PostId}/addComment`, CommentData)
-			.then(async () => {
-				await axios
-					.get(API_URL + `api/revalidate?path=${PostId}`)
-					.then((response) => {
-						console.log(response)
-						// Router.reload()
-					})
-					.catch((error) => {
-						console.log(error)
-						// Router.reload()
-					})
+			.then(({ data }) => {
+				setComments(data.data)
+
+				callback && callback()
+
+				setLoading(false)
 			})
 			.catch((err) => {
 				alert(err.data)
@@ -100,10 +95,16 @@ export default function Post({ post }) {
 				</section>
 
 				<section className="comments">
-					<Comments post={post} />
+					<Comments
+						postId={PostId}
+						addComment={addComment}
+						comments={comments}
+					/>
 					<AddComment
 						submit={() => {
-							addComment()
+							addComment(null, () => {
+								setComment("")
+							})
 						}}
 						comment={comment}
 						setComment={setComment}

@@ -1,7 +1,5 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-key */
-import axios from "axios"
-import Router from "next/router"
 import { useState } from "react"
 import { CommentType } from "../../../../types/Comment"
 import { formatDate } from "../../../api/posts/services/formatDate"
@@ -9,11 +7,9 @@ import { API_URL } from "../../../_document"
 import AddComment from "./addComment"
 import styled, { DefaultTheme, StyledComponent } from "styled-components"
 
-const Comments = ({ post }) => {
+const Comments = ({ postId, comments, addComment }) => {
 	// eu tentei fazer isso não parecer uma bagunça...
 	// simplesmente impossivel de fazer isso.
-
-	const Comments = post?.Comments
 
 	const [addCommentVisible, setAddCommentVisible] = useState("none")
 	const [loading, setLoading] = useState(false)
@@ -22,44 +18,34 @@ const Comments = ({ post }) => {
 	const [comment, setComment] = useState("")
 	const [reference, setReference] = useState(null)
 
-	const PostId = post?.Post?._id
 	const author = "Um cara legal!"
 
-	const addComment = async () => {
+	const addItemComment = async () => {
 		setLoading(true)
 
 		const CommentData = {
-			PostID: PostId,
+			PostID: postId,
+			PostOwerID: commentID,
 			Content: comment,
 			Author: author,
 			Reference: reference,
 		}
 
-		await axios
-			.post(API_URL + `api/posts/${PostId}/addComment`, CommentData)
-			.then(async () => {
-				await axios
-					.get(API_URL + `api/revalidate?path=${PostId}`)
-					.then((response) => {
-						console.log(response)
-						// Router.reload()
-					})
-					.catch((error) => {
-						console.log(error)
-						// Router.reload()
-					})
-			})
-			.catch((err) => {
-				alert(err.data)
-				setLoading(false)
-			})
+		addComment &&
+			(await addComment(CommentData, () => {
+				setComment("")
+				setCommentId("")
+				setReference(null)
+			}))
+
+		setLoading(false)
 	}
 
 	return (
 		<>
-			{Comments ? (
+			{comments ? (
 				<Container>
-					{Comments.map((Comment: CommentType) => (
+					{comments.map((Comment: CommentType) => (
 						<PaddingCommentContainer>
 							<CommentContainer
 								AddCommentVisible={addCommentVisible}
@@ -118,7 +104,7 @@ const Comments = ({ post }) => {
 								</div>
 								<AddComment
 									submit={() => {
-										addComment()
+										addItemComment()
 									}}
 									comment={comment}
 									setComment={setComment}
@@ -193,7 +179,7 @@ const Comments = ({ post }) => {
 													)}
 												</div>
 												<AddComment
-													submit={() => addComment()}
+													submit={() => addItemComment()}
 													comment={comment}
 													setComment={setComment}
 													loading={loading}
