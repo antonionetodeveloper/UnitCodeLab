@@ -54,7 +54,6 @@ const AddComment = async (
 				await ParentComment.save()
 				await Post.save()
 
-				await response.revalidate("/posts/post/" + PostID)
 				const AllComments = await CommentsModule.find({ post: PostID })
 
 				return response.status(201).json({

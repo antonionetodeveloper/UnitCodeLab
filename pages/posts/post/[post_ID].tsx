@@ -31,7 +31,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
 		props: {
 			post: postData,
 		},
-		revalidate: 60,
 	}
 }
 
@@ -63,14 +62,27 @@ export default function Post({ post }) {
 			.post(API_URL + `api/posts/${PostId}/addComment`, CommentData)
 			.then(({ data }) => {
 				setComments(data.data)
-
 				callback && callback()
-
 				setLoading(false)
 			})
 			.catch((err) => {
 				alert(err.data)
 				setLoading(false)
+			})
+
+		revalidate()
+	}
+
+	const revalidate = async () => {
+		await axios
+			.post(API_URL + "/api/revalidate", {
+				PostID: PostId,
+			})
+			.then((res) => {
+				console.log(res)
+			})
+			.catch((err) => {
+				console.log(err)
 			})
 	}
 
