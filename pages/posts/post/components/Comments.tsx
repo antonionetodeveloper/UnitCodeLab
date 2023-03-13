@@ -3,7 +3,6 @@
 import { useState } from "react"
 import { CommentType } from "../../../../types/Comment"
 import { formatDate } from "../../../api/posts/services/formatDate"
-import { API_URL } from "../../../_document"
 import AddComment from "./addComment"
 import styled, { DefaultTheme, StyledComponent } from "styled-components"
 
@@ -18,7 +17,7 @@ const Comments = ({ postId, comments, addComment }) => {
 	const [comment, setComment] = useState("")
 	const [reference, setReference] = useState(null)
 
-	const author = "Um cara legal!"
+	const author = "Uma pessoa gente boa"
 
 	const addItemComment = async () => {
 		setLoading(true)

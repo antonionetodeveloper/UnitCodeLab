@@ -27,7 +27,9 @@ export function formatDate(updatedAt) {
 		} atrás`
 	} else if (diffInSeconds >= 60) {
 		const diffInMinutes = Math.floor(diffInSeconds / 60)
-		timeDescription = `minutos atrás`
+		timeDescription = `${diffInMinutes} ${
+			diffInMinutes === 1 ? "minuto" : "minutos"
+		} atrás`
 	} else {
 		timeDescription = "agora mesmo"
 	}

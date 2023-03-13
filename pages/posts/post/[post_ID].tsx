@@ -31,6 +31,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 		props: {
 			post: postData,
 		},
+		revalidate: 60,
 	}
 }
 
@@ -45,7 +46,7 @@ export default function Post({ post }) {
 	const [comments, setComments] = useState(post?.Comments || [])
 
 	const PostId = post?.Post?._id
-	const author = "Um cara legal!"
+	const author = "Uma pessoa gente boa"
 
 	const addComment = async (body = null, callback = null) => {
 		setLoading(true)
