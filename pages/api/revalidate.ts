@@ -1,6 +1,6 @@
 import { CORS } from "./../../middleware/Cors"
 
-async function handler(req, res) {
+async function reavlidator(req, res) {
 	const { PostID } = req.body
 
 	try {
@@ -11,4 +11,4 @@ async function handler(req, res) {
 	}
 }
 
-export default CORS(handler)
+export default CORS(reavlidator)
