@@ -1,4 +1,6 @@
-export default async function handler(req, res) {
+import { CORS } from "./../../middleware/Cors"
+
+async function handler(req, res) {
 	const { PostID } = req.body
 
 	try {
@@ -8,3 +10,5 @@ export default async function handler(req, res) {
 		return res.status(500).send("Error revalidating")
 	}
 }
+
+export default CORS(handler)
