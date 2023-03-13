@@ -1,4 +1,4 @@
-import { CORS } from "./../../middleware/Cors"
+import { CORS } from "../../middleware/Cors"
 
 async function reavlidator(req, res) {
 	const { PostID } = req.body
@@ -7,7 +7,7 @@ async function reavlidator(req, res) {
 		await res.revalidate("/posts/post/" + PostID)
 		return res.json({ revalidated: true })
 	} catch (err) {
-		return res.status(500).send("Error revalidating")
+		return res.status(500).json({ success: false })
 	}
 }
 

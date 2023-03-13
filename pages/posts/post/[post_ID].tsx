@@ -75,7 +75,7 @@ export default function Post({ post }) {
 
 	const revalidate = async () => {
 		await axios
-			.post("https://unitedcodelab.tech/" + "api/revalidate", {
+			.post(API_URL + "api/accessRevalidate", {
 				PostID: PostId,
 			})
 			.then((res) => {
