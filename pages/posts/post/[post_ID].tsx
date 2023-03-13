@@ -19,7 +19,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 	const paths = IDs?.map((ID: string) => ({ params: { post_ID: ID } }))
 	return {
 		paths,
-		fallback: false,
+		fallback: "blocking",
 	}
 }
 
@@ -31,7 +31,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
 		props: {
 			post: postData,
 		},
-		revalidate: 5,
 	}
 }
 
