@@ -10,6 +10,7 @@ import { GetStaticPaths, GetStaticProps } from "next"
 import { formatDate } from "../../api/posts/services/formatDate"
 import AddComment from "./components/addComment"
 import axios from "axios"
+import { parseCookies } from "nookies"
 
 export const getStaticPaths: GetStaticPaths = async () => {
 	const response = await fetch(API_URL + "api/posts/ShowIDposts")
@@ -37,15 +38,15 @@ export const getStaticProps: GetStaticProps = async (context) => {
 export default function Post({ post }) {
 	const Post = post?.Post
 
-	const { setSelectedHeaderItem } = useContext(Context)
+	const { setSelectedHeaderItem, auth } = useContext(Context)
 	setSelectedHeaderItem("none")
+	const cookies = parseCookies()
 
 	const [loading, setLoading] = useState(false)
 	const [comment, setComment] = useState("")
 	const [comments, setComments] = useState(post?.Comments || [])
 
 	const PostId = post?.Post?._id
-	const author = "Uma pessoa gente boa"
 
 	const addComment = async (body = null, callback = null) => {
 		setLoading(true)
@@ -54,7 +55,7 @@ export default function Post({ post }) {
 			commentID: PostId,
 			PostID: PostId,
 			Content: comment,
-			Author: author,
+			Author: auth ? cookies.name : "Anônimo",
 			Reference: null,
 		}
 

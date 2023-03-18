@@ -1,14 +1,22 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-key */
-import { useState } from "react"
+import { useContext, useState } from "react"
+
 import { CommentType } from "../../../../types/Comment"
+
 import { formatDate } from "../../../api/posts/services/formatDate"
+import Context from "../../../../context/Context"
 import AddComment from "./addComment"
+import { parseCookies } from "nookies"
+
 import styled, { DefaultTheme, StyledComponent } from "styled-components"
 
 const Comments = ({ postId, comments, addComment }) => {
 	// eu tentei fazer isso não parecer uma bagunça...
 	// simplesmente impossivel de fazer isso.
+
+	const { auth } = useContext(Context)
+	const cookies = parseCookies()
 
 	const [addCommentVisible, setAddCommentVisible] = useState("none")
 	const [loading, setLoading] = useState(false)
@@ -17,8 +25,6 @@ const Comments = ({ postId, comments, addComment }) => {
 	const [comment, setComment] = useState("")
 	const [reference, setReference] = useState(null)
 
-	const author = "Uma pessoa gente boa"
-
 	const addItemComment = async () => {
 		setLoading(true)
 
@@ -26,7 +32,7 @@ const Comments = ({ postId, comments, addComment }) => {
 			PostID: postId,
 			PostOwerID: commentID,
 			Content: comment,
-			Author: author,
+			Author: auth ? cookies.name : "Anônimo",
 			Reference: reference,
 		}
 

@@ -11,7 +11,6 @@ async function Access(req, res) {
 				PostID,
 			},
 		)
-		console.log(Revalidate)
 
 		return res.json({ success: true })
 	} catch (err) {
