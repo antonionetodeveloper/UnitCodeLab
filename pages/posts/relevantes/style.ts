@@ -1,6 +1,11 @@
-import styled from "styled-components"
+import styled, { DefaultTheme, StyledComponent } from "styled-components"
 
-export const Container = styled.main`
+export const Container: StyledComponent<
+	"main",
+	DefaultTheme,
+	{ currentPage: number },
+	never
+> = styled.main`
 	padding-top: 15vh;
 	min-height: 85vh;
 	color: white;
@@ -18,6 +23,31 @@ export const Container = styled.main`
 	h2 {
 		font-size: 2.5rem;
 		font-weight: 900;
+	}
+
+	.pageOptions {
+		display: flex;
+		gap: 1vw;
+		margin-bottom: 2vh;
+
+		.${({ currentPage }: { currentPage: number }) => `button_${currentPage}`} {
+			text-decoration: underline;
+			font-size: 2rem;
+		}
+
+		button {
+			background-color: transparent;
+			border: none;
+			color: white;
+			font-size: 1.5rem;
+			font-weight: 700;
+			transition: 0.3s;
+
+			:hover {
+				cursor: pointer;
+				padding: 0 1vw 0 1vw;
+			}
+		}
 	}
 `
 export default Container
