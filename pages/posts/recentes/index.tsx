@@ -53,7 +53,6 @@ export default function Recentes({ posts, CurrentPage }) {
 
 export async function getServerSideProps(context) {
 	const CurrentPage = context.query.page || 1
-	console.log(context.query)
 
 	const response = await fetch(
 		API_URL + "api/posts/RecentPosts" + "?page=" + CurrentPage,

@@ -75,16 +75,9 @@ export default function Post({ post }) {
 	}
 
 	const revalidate = async () => {
-		await axios
-			.post(API_URL + "api/accessRevalidate", {
-				PostID: PostId,
-			})
-			.then((res) => {
-				console.log(res)
-			})
-			.catch((err) => {
-				console.log(err)
-			})
+		await axios.post(API_URL + "api/accessRevalidate", {
+			PostID: PostId,
+		})
 	}
 
 	return (
