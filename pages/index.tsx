@@ -13,9 +13,11 @@ import TiltDivider from "../components/divider/Tilt"
 import ApiSection from "./components/Api"
 import Footer from "../components/Footer"
 
-export default function Index() {
+export default function Index({ data }: any) {
 	const { setSelectedHeaderItem } = useContext(Context)
 	setSelectedHeaderItem("inicio")
+
+	const GIF = data.data.images.original.url
 
 	return (
 		<>
@@ -26,7 +28,7 @@ export default function Index() {
 			<Header />
 
 			<Main>
-				<HomeBanner />
+				<HomeBanner GIF={GIF} />
 				<DividerWave />
 				<TiraDuvidas />
 				<Contribua />
@@ -37,4 +39,20 @@ export default function Index() {
 			<Footer />
 		</>
 	)
+}
+
+export async function getServerSideProps() {
+	const ApiKey = process.env.NEXT_PUBLIC_GIPHY_API_KEY
+
+	const response = await fetch(
+		`https://api.giphy.com/v1/gifs/random?api_key=${ApiKey}&tag=computer`,
+	)
+
+	const data = await response.json()
+
+	return {
+		props: {
+			data,
+		},
+	}
 }

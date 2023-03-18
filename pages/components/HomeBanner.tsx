@@ -3,7 +3,7 @@ import Link from "next/link"
 import styled from "styled-components"
 import RegularButton from "../../components/Buttons/AlternativeButton"
 
-const HomeBanner = () => {
+const HomeBanner = ({ GIF }: { GIF: string }) => {
 	return (
 		<Container>
 			<div>
@@ -22,13 +22,7 @@ const HomeBanner = () => {
 				</Link>
 			</div>
 			<div className="Image">
-				<Image
-					src={"/home/test.gif"}
-					height={500}
-					width={900}
-					quality={100}
-					priority
-				/>
+				<Image src={GIF} height={500} width={900} quality={100} priority />
 			</div>
 		</Container>
 	)
