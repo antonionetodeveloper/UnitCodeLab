@@ -23,7 +23,7 @@ const HomeBanner = () => {
 			</div>
 			<div className="Image">
 				<Image
-					src={"/home/screen-shot-page.png"}
+					src={"/home/test.gif"}
 					height={500}
 					width={900}
 					quality={100}
