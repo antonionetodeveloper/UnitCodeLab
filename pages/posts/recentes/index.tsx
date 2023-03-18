@@ -56,7 +56,7 @@ export async function getServerSideProps(context) {
 	console.log(context.query)
 
 	const response = await fetch(
-		"http://localhost:3000/" + "api/posts/RecentPosts" + "?page=" + CurrentPage,
+		API_URL + "api/posts/RecentPosts" + "?page=" + CurrentPage,
 	)
 	const posts = await response.json()
 
