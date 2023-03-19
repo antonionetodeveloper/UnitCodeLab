@@ -1,3 +1,4 @@
+import Head from "next/head"
 import styled from "styled-components"
 
 // credits: Made by @Nawsome
@@ -5,34 +6,39 @@ import styled from "styled-components"
 
 const Loader = ({ little }: { little?: boolean }) => {
 	return (
-		<Container isLittle={little}>
-			<div className="boxes">
-				<div className="box">
-					<div></div>
-					<div></div>
-					<div></div>
-					<div></div>
+		<>
+			<Head>
+				<title>Carregando...</title>
+			</Head>
+			<Container isLittle={little}>
+				<div className="boxes">
+					<div className="box">
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+					</div>
+					<div className="box">
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+					</div>
+					<div className="box">
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+					</div>
+					<div className="box">
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+					</div>
 				</div>
-				<div className="box">
-					<div></div>
-					<div></div>
-					<div></div>
-					<div></div>
-				</div>
-				<div className="box">
-					<div></div>
-					<div></div>
-					<div></div>
-					<div></div>
-				</div>
-				<div className="box">
-					<div></div>
-					<div></div>
-					<div></div>
-					<div></div>
-				</div>
-			</div>
-		</Container>
+			</Container>
+		</>
 	)
 }
 
