@@ -14,7 +14,11 @@ const HomeBanner = ({ GIF }: { GIF: string }) => {
 				</p>
 			</div>
 			<div className="buttons">
-				<RegularButton especial>Tirar uma dúvida</RegularButton>
+				<Link href="/posts/criar">
+					<a href="/posts/criar">
+						<RegularButton especial>Tirar uma dúvida</RegularButton>
+					</a>
+				</Link>
 				<Link href="/posts/recentes/">
 					<a href="/posts/recentes/">
 						<RegularButton>Ir para discussões</RegularButton>

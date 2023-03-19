@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import Image from "next/image"
 import RegularButton from "../../components/Buttons/RegularButton"
+import Link from "next/link"
 
 const Contribua = () => {
 	return (
@@ -17,7 +18,11 @@ const Contribua = () => {
 						área de tecnologia. Sinta-se livre para compartilhar o que quiser!
 					</p>
 				</div>
-				<RegularButton>Contribuir</RegularButton>
+				<Link href="/posts/criar">
+					<a href="/posts/criar">
+						<RegularButton>Contribuir</RegularButton>
+					</a>
+				</Link>
 			</div>
 			<div className="ImageContainer">
 				<div className="SVG">
@@ -69,6 +74,10 @@ const Container = styled.section`
 				width: 30vw;
 				font-size: 1.2rem;
 			}
+		}
+
+		a {
+			text-decoration: none;
 		}
 	}
 	.ImageContainer {

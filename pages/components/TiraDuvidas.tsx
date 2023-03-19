@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import Image from "next/image"
 import RegularButton from "../../components/Buttons/RegularButton"
+import Link from "next/link"
 
 const TiraDuvidas = () => {
 	return (
@@ -16,7 +17,11 @@ const TiraDuvidas = () => {
 						pergunta, ou achando a solução do seu problema em outros problemas.
 					</p>
 				</div>
-				<RegularButton>Tirar minha dúvida</RegularButton>
+				<Link href="/posts/criar">
+					<a href="/posts/criar">
+						<RegularButton>Tirar minha dúvida</RegularButton>
+					</a>
+				</Link>
 			</div>
 			<div className="ImageContainer">
 				<div className="SVG">
@@ -66,6 +71,10 @@ const Container = styled.section`
 				width: 30vw;
 				font-size: 1.2rem;
 			}
+		}
+
+		a {
+			text-decoration: none;
 		}
 	}
 	.ImageContainer {

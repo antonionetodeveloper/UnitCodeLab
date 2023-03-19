@@ -45,25 +45,14 @@ const Header = () => {
 					<Search />
 				</div>
 				<div>
-					{auth ? (
-						<>
-							<Link href="/usuario/dashboard">
-								<RegularButton>Criar uma discussão</RegularButton>
-							</Link>
-							<Link href="/usuario/dashboard">
-								<img src="/assets/user.png" alt="usuario" />
-							</Link>
-						</>
-					) : (
-						<>
-							<Link href="/usuario/">
-								<RegularButton>Criar uma discussão</RegularButton>
-							</Link>
-							<Link href="/usuario/">
-								<img src="/assets/user.png" alt="usuario" />
-							</Link>
-						</>
-					)}
+					<Link href="/posts/criar">
+						<a href="/posts/criar" className="create">
+							<RegularButton>Criar uma discussão</RegularButton>
+						</a>
+					</Link>
+					<Link href="/usuario/">
+						<img src="/assets/user.png" alt="usuario" />
+					</Link>
 				</div>
 			</nav>
 		</Container>
@@ -137,10 +126,11 @@ const Container: any = styled.header`
 						cursor: pointer;
 					}
 				}
-				a.api {
-					text-decoration: none;
-				}
 			}
+		}
+		a.api,
+		a.create {
+			text-decoration: none;
 		}
 	}
 
