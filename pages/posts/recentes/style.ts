@@ -33,12 +33,13 @@ export const Container: StyledComponent<
 		.${({ currentPage }: { currentPage: number }) => `button_${currentPage}`} {
 			text-decoration: underline;
 			font-size: 2rem;
+			color: white;
 		}
 
 		button {
 			background-color: transparent;
 			border: none;
-			color: white;
+			color: #ccc;
 			font-size: 1.5rem;
 			font-weight: 700;
 			transition: 0.3s;
@@ -46,6 +47,7 @@ export const Container: StyledComponent<
 			:hover {
 				cursor: pointer;
 				padding: 0 1vw 0 1vw;
+				color: white;
 			}
 		}
 	}
