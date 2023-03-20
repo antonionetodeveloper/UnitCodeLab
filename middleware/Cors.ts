@@ -1,18 +1,22 @@
-import { cors } from "cors"
+import nextConnect from "next-connect"
 import type { NextApiRequest, NextApiResponse, NextApiHandler } from "next"
 import type { RegularAnswear } from "../types/RegularAnswear"
+import NextCors from "nextjs-cors"
+import cors from "cors"
 
-const Cors = cors({
-	origin: "https://www.unitedcodelab.tech",
-	methods: ["GET", "POST", "PUT"],
-	allowedHeaders: ["Content-Type"],
-})
+const handlerCors = nextConnect()
 
 export const CORS =
 	(handler: NextApiHandler) =>
 	async (req: NextApiRequest, res: NextApiResponse<RegularAnswear>) => {
 		try {
-			await Cors(req, res)
+			await NextCors(req, res, {
+				origin: "https://www.unitedcodelab.tech",
+				methods: ["GET", "POST", "PUT"],
+				optionsSuccessStatus: 200, // navegadores antigos dao problema quando se retorna 204
+			})
+			handlerCors.use(cors({ origin: "https://www.unitedcodelab.tech" }))
+
 			return handler(req, res)
 		} catch (e) {
 			console.log("Erro ao tratar a politica de CORS: ", e)
