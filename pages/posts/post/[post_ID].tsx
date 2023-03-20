@@ -12,8 +12,6 @@ import AddComment from "./components/addComment"
 import axios from "axios"
 import { parseCookies } from "nookies"
 
-// POV: acabou de cair uma bomba em sua cabeça.
-
 export const getStaticPaths: GetStaticPaths = async () => {
 	const response = await fetch(API_URL + "api/posts/ShowIDposts")
 	const { data } = await response.json()
