@@ -18,7 +18,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 	const paths = data.map((ID: string) => ({ params: { post_ID: ID } }))
 	return {
-		paths,
+		paths: [],
 		fallback: "blocking",
 	}
 }
