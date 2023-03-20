@@ -12,20 +12,43 @@ import AddComment from "./components/addComment"
 import axios from "axios"
 import { parseCookies } from "nookies"
 
-export const getStaticPaths: GetStaticPaths = async () => {
-	const response = await fetch(API_URL + "api/posts/ShowIDposts")
-	const { data } = await response.json()
+import { PostModule } from "../../../models/posts"
+import { CommentsModule } from "../../../models/comments"
+import mongoose from "mongoose"
+import { ConnectDB } from "../../../middleware/ConnectDB"
 
-	const paths = data.map((ID: string) => ({ params: { post_ID: ID } }))
+const connectDB = async () => {
+	const { MONGO_DB_URL } = process.env
+	await mongoose.connect(MONGO_DB_URL)
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+	await connectDB()
+	const data = await PostModule.find().distinct("_id")
+	// const teste = await data.json()
+
+	// const { data } = await response.json()
+
+	const paths = data.map((ID: string) => ({ params: { post_ID: String(ID) } }))
+
 	return {
-		paths: [],
+		paths,
 		fallback: "blocking",
 	}
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
-	const response = await fetch(API_URL + "api/posts/" + context.params.post_ID)
-	const postData = await response.json()
+	await connectDB()
+	const Post = await PostModule.findOne({ _id: context.params?.post_ID })
+
+	const AllComments = await CommentsModule.find({
+		post: context.params?.post_ID,
+	})
+
+	const postData = {
+		Post: JSON.parse(JSON.stringify(Post)),
+		Comments: JSON.parse(JSON.stringify(AllComments)),
+	}
 
 	return {
 		props: {
