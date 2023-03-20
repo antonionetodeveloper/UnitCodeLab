@@ -8,9 +8,8 @@ const GetIdPosts = async (
 	response: NextApiResponse,
 ) => {
 	if (request.method == "GET") {
-		/* const AllPosts = await PostModule.find()
-		const Data = AllPosts.map((item) => item._id) */
-		return response.status(200).json({ Data: "data" })
+		const allPosts = await PostModule.find().distinct("_id")
+		return response.status(200).json({ success: true, data: allPosts })
 	}
 	return response.status(405).json({ success: false })
 }

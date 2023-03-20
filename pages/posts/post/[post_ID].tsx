@@ -14,10 +14,9 @@ import { parseCookies } from "nookies"
 
 export const getStaticPaths: GetStaticPaths = async () => {
 	const response = await fetch(API_URL + "api/posts/ShowIDposts")
-	const Data = await response.json()
-	const IDs = Data.Data
+	const { data } = await response.json()
 
-	const paths = IDs?.map((ID: string) => ({ params: { post_ID: ID } }))
+	const paths = data.map((ID: string) => ({ params: { post_ID: ID } }))
 	return {
 		paths,
 		fallback: "blocking",
