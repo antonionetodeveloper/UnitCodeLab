@@ -16,7 +16,7 @@ export const CORS =
 		} catch (e) {
 			console.log("Erro ao tratar a politica de CORS: ", e)
 			return res
-				.status(500)
+				.status(404)
 				.json({ error: "Ocorreu erro ao tratar a politica de CORS." })
 		}
 	}
