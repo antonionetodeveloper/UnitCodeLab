@@ -7,10 +7,16 @@ const GetIdPosts = async (
 	request: NextApiRequest,
 	response: NextApiResponse,
 ) => {
-	if (request.method == "GET") {
+	if (request.method === "GET") {
 		/* const AllPosts = await PostModule.find()
 		const Data = AllPosts.map((item) => item._id) */
-		return response.status(200).json({ Data: "data" })
+
+		const data = {
+			success: true,
+			data: null,
+		}
+
+		return response.status(200).json(data)
 	}
 	return response.status(405).json({ success: false })
 }
