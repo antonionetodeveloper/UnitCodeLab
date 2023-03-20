@@ -11,6 +11,12 @@ module.exports = {
 		"plugin:react-hooks/recommended",
 		"plugin:prettier/recommended",
 	],
+	"prettier/prettier": [
+		"error",
+		{
+			endOfLine: "auto",
+		},
+	],
 	overrides: [],
 	parser: "@typescript-eslint/parser",
 	parserOptions: {
