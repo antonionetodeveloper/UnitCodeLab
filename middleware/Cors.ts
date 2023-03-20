@@ -7,7 +7,7 @@ export const CORS =
 	async (req: NextApiRequest, res: NextApiResponse<RegularAnswear>) => {
 		try {
 			await NextCors(req, res, {
-				origin: "https://www.unitedcodelab.tech",
+				origin: "*",
 				methods: ["GET", "POST", "PUT"],
 				optionsSuccessStatus: 200, // navegadores antigos dao problema quando se retorna 204
 			})
