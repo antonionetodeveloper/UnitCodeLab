@@ -1,6 +1,10 @@
+import nextConnect from "next-connect"
 import type { NextApiRequest, NextApiResponse, NextApiHandler } from "next"
 import type { RegularAnswear } from "../types/RegularAnswear"
 import NextCors from "nextjs-cors"
+import cors from "cors"
+
+const handlerCors = nextConnect()
 
 export const CORS =
 	(handler: NextApiHandler) =>
@@ -11,6 +15,7 @@ export const CORS =
 				methods: ["GET", "POST", "PUT"],
 				optionsSuccessStatus: 200, // navegadores antigos dao problema quando se retorna 204
 			})
+			handlerCors.use(cors({ origin: "https://www.unitedcodelab.tech" }))
 
 			return handler(req, res)
 		} catch (e) {
