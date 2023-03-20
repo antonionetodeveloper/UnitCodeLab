@@ -26,7 +26,12 @@ const endPointLogin = async (req: NextApiRequest, res: NextApiResponse) => {
 			if (foundUsers && foundUsers.length > 0) {
 				const foundSingleUser = foundUsers[0]
 				const token = jwt.sign({ _id: foundSingleUser._id }, JWT_KEY_TOKEN)
-				return res.status(200).json({ success: true, token })
+
+				foundSingleUser.password = null
+				foundSingleUser.email = null
+				return res
+					.status(200)
+					.json({ success: true, data: { token, user: foundSingleUser } })
 			} else {
 				return res
 					.status(400)

@@ -18,18 +18,25 @@ export const Login = () => {
 	const [textError, setTextError] = useState("")
 
 	const handleLoginSubmit = async () => {
-		axios
-			.post(API_URL + "api/user/Login", {
-				login: login,
-				password: password,
+		await axios
+			.post("http://localhost:3000/" + "api/user/Login", {
+				login,
+				password,
 			})
 			.then((res) => {
-				if (res.status === 200) {
+				const response = res.data
+				if (response.success) {
 					setLogin("")
 					setPassword("")
 
-					const token = res.data.token
+					const token = response.data.token
 					setCookie(null, "token", token, {
+						maxAge: 604800, // 7 days = 604800 sec
+						path: "/",
+					})
+
+					const name = response.data.user.name
+					setCookie(null, "name", name, {
 						maxAge: 604800, // 7 days = 604800 sec
 						path: "/",
 					})
@@ -39,7 +46,7 @@ export const Login = () => {
 				}
 			})
 			.catch((err) => {
-				setTextError(err.response.data.error)
+				setTextError(err.data)
 			})
 	}
 

@@ -22,7 +22,7 @@ export default function Dashboard() {
 			<Header />
 
 			<Container style={{ paddingTop: "10vh" }}>
-				<Link href="/posts/criar/">
+				{/* <Link href="/posts/criar/">
 					<p>Criar uma discussão</p>
 				</Link>
 
@@ -32,7 +32,8 @@ export default function Dashboard() {
 
 				<Link href="/">
 					<p>Editar perfil</p>
-				</Link>
+				</Link> */}
+				<p>Em breve...</p>
 			</Container>
 		</>
 	)
