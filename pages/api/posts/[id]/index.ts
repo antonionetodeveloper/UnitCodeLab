@@ -1,10 +1,9 @@
-import { PostModule } from "../../../../models/posts"
 /* eslint-disable prefer-const */
+import { PostModule } from "../../../../models/posts"
 import { CommentsModule } from "../../../../models/comments"
 import { NextApiRequest, NextApiResponse } from "next"
 import { ConnectDB } from "../../../../middleware/ConnectDB"
 import { CORS } from "../../../../middleware/Cors"
-import { formatDate } from "../services/formatDate"
 
 const GetPost = async (request: NextApiRequest, response: NextApiResponse) => {
 	if (request.method == "GET") {
