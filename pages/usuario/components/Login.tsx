@@ -2,6 +2,7 @@ import axios from "axios"
 import { useRouter } from "next/router"
 import { setCookie } from "nookies"
 import { useContext, useState } from "react"
+import styled from "styled-components"
 import RegularButton from "../../../components/Buttons/RegularButton"
 import { RegularInput } from "../../../components/Inputs/RegularInput"
 import SimpleLoader from "../../../components/Loaders/simple"
@@ -75,17 +76,26 @@ export const Login = () => {
 						value={password}
 					/>
 				</div>
-				<RegularButton
-					clicked={() => {
-						handleLoginSubmit()
-					}}
-				>
-					{loading ? <SimpleLoader /> : "Entrar"}
-				</RegularButton>
-				{textError !== "" ? <span>{textError}</span> : <></>}
+				<ButtonContainer loading={loading}>
+					<RegularButton
+						clicked={() => {
+							handleLoginSubmit()
+						}}
+					>
+						{loading ? <SimpleLoader /> : "Entrar"}
+					</RegularButton>
+					{textError !== "" ? <span>{textError}</span> : <></>}
+				</ButtonContainer>
 			</div>
 		</form>
 	)
 }
+
+const ButtonContainer: any = styled.div`
+	button {
+		background-color: ${(props: any) =>
+			props.loading ? "#3b82f6" : "#f3f7fe"};
+	}
+`
 
 export default Login

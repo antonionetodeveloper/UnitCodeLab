@@ -8,6 +8,7 @@ import RegularButton from "../../../components/Buttons/RegularButton"
 import { RegularInput } from "../../../components/Inputs/RegularInput"
 import { API_URL } from "../../_document"
 import SimpleLoader from "../../../components/Loaders/simple"
+import styled from "styled-components"
 
 export const SignUp = () => {
 	const Router = useRouter()
@@ -87,17 +88,26 @@ export const SignUp = () => {
 						value={passwordRegister}
 					/>
 				</div>
-				<RegularButton
-					clicked={() => {
-						handleSingUpSubmit()
-					}}
-				>
-					{loading ? <SimpleLoader /> : "Cadastrar"}
-				</RegularButton>
-				{textError !== "" ? <span>{textError}</span> : <></>}
+				<ButtonContainer loading={loading}>
+					<RegularButton
+						clicked={() => {
+							handleSingUpSubmit()
+						}}
+					>
+						{loading ? <SimpleLoader /> : "Cadastrar"}
+					</RegularButton>
+					{textError !== "" ? <span>{textError}</span> : <></>}
+				</ButtonContainer>
 			</div>
 		</form>
 	)
 }
+
+const ButtonContainer: any = styled.div`
+	button {
+		background-color: ${(props: any) =>
+			props.loading ? "#3b82f6" : "#f3f7fe"};
+	}
+`
 
 export default SignUp
