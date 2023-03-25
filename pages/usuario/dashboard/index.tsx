@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { useRouter } from "next/router"
 import { useContext, useEffect } from "react"
+import RegularButton from "../../../components/Buttons/RegularButton"
 import Header from "../../../components/Header"
 import Context from "../../../context/Context"
 import Container from "./style"
@@ -34,6 +35,7 @@ export default function Dashboard() {
 					<p>Editar perfil</p>
 				</Link> */}
 				<p>Em breve...</p>
+				<RegularButton>Sair</RegularButton>
 			</Container>
 		</>
 	)

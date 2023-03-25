@@ -27,11 +27,12 @@ export const SignUp = () => {
 				Password: passwordRegister,
 			})
 			.then((res) => {
-				if (res.status === 201) {
+				const response = res.data
+				if (response.success) {
 					setLoginRegister("")
 					setPasswordRegister("")
 
-					const token = res.data.token
+					const token = response.data.token
 					setCookie(null, "token", token, {
 						maxAge: 604800, // 7 days = 604800 sec
 						path: "/",
