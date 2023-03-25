@@ -7,6 +7,7 @@ import axios from "axios"
 import RegularButton from "../../../components/Buttons/RegularButton"
 import { RegularInput } from "../../../components/Inputs/RegularInput"
 import { API_URL } from "../../_document"
+import SimpleLoader from "../../../components/Loaders/simple"
 
 export const SignUp = () => {
 	const Router = useRouter()
@@ -18,8 +19,11 @@ export const SignUp = () => {
 	const [passwordRegister, setPasswordRegister] = useState("")
 
 	const [textError, setTextError] = useState("")
+	const [loading, setLoading] = useState(false)
 
 	const handleSingUpSubmit = async () => {
+		setLoading(true)
+
 		axios
 			.post(API_URL + "api/user/CreateAccount", {
 				Name: name,
@@ -45,11 +49,13 @@ export const SignUp = () => {
 					})
 
 					setAuth(true)
+					setLoading(false)
 					Router.push("/usuario/dashboard")
 				}
 			})
 			.catch((err) => {
 				setTextError(err.response.data.error)
+				setLoading(false)
 			})
 	}
 
@@ -86,7 +92,7 @@ export const SignUp = () => {
 						handleSingUpSubmit()
 					}}
 				>
-					Cadastrar
+					{loading ? <SimpleLoader /> : "Cadastrar"}
 				</RegularButton>
 				{textError !== "" ? <span>{textError}</span> : <></>}
 			</div>

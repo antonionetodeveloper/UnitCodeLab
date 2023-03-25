@@ -4,6 +4,7 @@ import { setCookie } from "nookies"
 import { useContext, useState } from "react"
 import RegularButton from "../../../components/Buttons/RegularButton"
 import { RegularInput } from "../../../components/Inputs/RegularInput"
+import SimpleLoader from "../../../components/Loaders/simple"
 import Context from "../../../context/Context"
 import { API_URL } from "../../_document"
 
@@ -16,10 +17,12 @@ export const Login = () => {
 	const [password, setPassword] = useState("")
 
 	const [textError, setTextError] = useState("")
+	const [loading, setLoading] = useState(false)
 
 	const handleLoginSubmit = async () => {
+		setLoading(true)
 		await axios
-			.post("http://localhost:3000/" + "api/user/Login", {
+			.post(API_URL + "api/user/Login", {
 				login,
 				password,
 			})
@@ -42,11 +45,13 @@ export const Login = () => {
 					})
 
 					setAuth(true)
+					setLoading(false)
 					Router.push("/usuario/dashboard")
 				}
 			})
 			.catch((err) => {
 				setTextError(err.data)
+				setLoading(false)
 			})
 	}
 
@@ -75,7 +80,7 @@ export const Login = () => {
 						handleLoginSubmit()
 					}}
 				>
-					Entrar
+					{loading ? <SimpleLoader /> : "Entrar"}
 				</RegularButton>
 				{textError !== "" ? <span>{textError}</span> : <></>}
 			</div>
