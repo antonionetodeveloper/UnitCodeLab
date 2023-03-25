@@ -32,13 +32,13 @@ export const SignUp = () => {
 					setLoginRegister("")
 					setPasswordRegister("")
 
-					const token = response.data.token
+					const token = response.token
 					setCookie(null, "token", token, {
 						maxAge: 604800, // 7 days = 604800 sec
 						path: "/",
 					})
 
-					const name = response.data.user.name
+					const name = response.user.name
 					setCookie(null, "name", name, {
 						maxAge: 604800, // 7 days = 604800 sec
 						path: "/",

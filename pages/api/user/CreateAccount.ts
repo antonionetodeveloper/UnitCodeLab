@@ -64,7 +64,9 @@ const CreateAccount = async (
 			})
 			const foundSingleUser = foundUsers[0]
 			const token = jwt.sign({ _id: foundSingleUser._id }, JWT_KEY_TOKEN)
-			return response.status(201).json({ success: true, token })
+			return response
+				.status(201)
+				.json({ success: true, token, user: foundSingleUser })
 		} catch (error) {
 			return response.status(400).json({
 				success: false,
