@@ -23,20 +23,24 @@ export default function Index({ data }: any) {
 		<>
 			<Head>
 				<title>Home</title>
+				<meta
+					name="google-site-verification"
+					content="_najphoPouxwNUV3YuyB_4gM0z_t-FtEBELBCDs6UjE"
+				/>
 			</Head>
 
-			<Header />
-
-			<Main>
-				<HomeBanner GIF={GIF} />
-				<DividerWave />
-				<TiraDuvidas />
-				<Contribua />
-				<TiltDivider />
-				<ApiSection />
-			</Main>
-
-			<Footer />
+			<body>
+				<Header />
+				<Main>
+					<HomeBanner GIF={GIF} />
+					<DividerWave />
+					<TiraDuvidas />
+					<Contribua />
+					<TiltDivider />
+					<ApiSection />
+				</Main>
+				<Footer />
+			</body>
 		</>
 	)
 }
